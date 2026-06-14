@@ -25,15 +25,17 @@ git clone --depth 1 https://github.com/fairgenomes/fairgenomes-semantic-model.gi
 
 ## Pre-populated source bundle
 
-If you maintain a consolidated source tree elsewhere (e.g.
-`/Users/SynapticFour/devel/ferrum-meta-sources`), you can symlink instead of cloning:
+If you maintain a consolidated source tree locally, symlink instead of cloning:
 
 ```bash
-ln -s /Users/SynapticFour/devel/ferrum-meta-sources/ghga/ghga-metadata-schema ghga-metadata-schema
-ln -s /Users/SynapticFour/devel/ferrum-meta-sources/ega-ena/ega-metadata-schema ega-metadata-schema
-ln -s /Users/SynapticFour/devel/ferrum-meta-sources/ega-ena/webin-xml webin-xml
-ln -s /Users/SynapticFour/devel/ferrum-meta-sources/ega-ena/fairgenomes-semantic-model fairgenomes-semantic-model
+# Example: sibling directory ferrum-meta-sources (adjust path to your checkout)
+SRC="../ferrum-meta-sources"
+ln -sf "${SRC}/ghga/ghga-metadata-schema" ghga-metadata-schema
+ln -sf "${SRC}/ega-ena/ega-metadata-schema" ega-metadata-schema
+ln -sf "${SRC}/ega-ena/webin-xml" webin-xml
+ln -sf "${SRC}/ega-ena/fairgenomes-semantic-model" fairgenomes-semantic-model
 ```
 
-See `ferrum-meta-sources/SOURCES.md` for a full index of papers, ontologies, and
-additional reference repositories (EVA, H3Africa, GA4GH, FEGA, GDI, DUO, etc.).
+See `ferrum-meta-sources/SOURCES.md` in your local source bundle for a full index of
+papers, ontologies, and additional reference repositories (EVA, H3Africa, GA4GH, FEGA,
+GDI, DUO, etc.).

@@ -58,7 +58,7 @@ fields to archive submission formats; protocol bindings live in Ferrum service c
 ## Archive metadata schemas (modelling sources)
 
 ferrum-core and profiles were derived from these upstream archive schemas. Clone into
-`ferrum-meta-sources/` per [`sources/README.md`](../../sources/README.md) (local symlinks;
+`ferrum-meta-sources/` per [Source clones](../sources.md) (local symlinks;
 not committed to git).
 
 | Archive | Repository | Used for |
@@ -79,7 +79,7 @@ not committed to git).
 | DUO | `DUO:` | Data use conditions |
 | HPO | `HP:` | Phenotype terms |
 
-See [`schema/ontologies/referenced-ontologies.md`](../../schema/ontologies/referenced-ontologies.md).
+See [Referenced ontologies](../schema/referenced-ontologies.md).
 
 ---
 

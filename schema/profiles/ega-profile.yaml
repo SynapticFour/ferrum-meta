@@ -251,7 +251,7 @@ slots:
   policy_url:
     description: >-
       Public URL hosting policy text. EGA.policy.json policyDescriptor.policyReference.
-    range: uritype
+    range: uri
 
   policy_alias:
     description: >-

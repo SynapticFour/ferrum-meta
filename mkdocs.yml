@@ -19,11 +19,14 @@ nav:
   - Design Principles: design-principles.md
   - African Context: african-context.md
   - FEGA Compatibility: fega-compatibility.md
-  - Referenced Ontologies: ../schema/ontologies/referenced-ontologies.md
+  - SynapticFour Stack: ECOSYSTEM.md
+  - Contributing: contributing.md
+  - Source clones: sources.md
+  - Referenced Ontologies: schema/referenced-ontologies.md
   - Protocol References: protocol-references/README.md
   - Crosswalks:
-      - GHGA ↔ EGA: ../crosswalk/ghga-ega-crosswalk.md
-      - H3Africa ↔ EGA: ../crosswalk/h3africa-ega-crosswalk.md
+      - GHGA ↔ EGA: crosswalk/ghga-ega-crosswalk.md
+      - H3Africa ↔ EGA: crosswalk/h3africa-ega-crosswalk.md
 
 markdown_extensions:
   - attr_list

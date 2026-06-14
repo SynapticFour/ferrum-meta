@@ -11,8 +11,9 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 
-# MkDocs build output
+# MkDocs / JSON Schema build output
 site/
+build/
 
 # OS / editor
 .DS_Store

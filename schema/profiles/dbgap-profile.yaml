@@ -20,9 +20,9 @@ default_prefix: FERRUM
 classes:
   DbGaPProfileSubmission:
     description: >-
-      TODO: Profile root — dbGaP study accession, consent group, subject/sample
-      pedigree fields, and NIH IC (institute) metadata.
-    is_a: FerrumSubmission
+      Stub profile root for future dbGaP mapping — study accession, consent group,
+      subject/sample pedigree fields, and NIH institute metadata.
+    is_a: FerrumCoreSubmission
     slots:
       - dbgap_study_accession
       - consent_group

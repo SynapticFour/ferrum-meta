@@ -45,7 +45,7 @@ if [[ -z "${SCHEMA}" ]]; then
     pathogen-*|path-*)
       SCHEMA="${ROOT}/schema/profiles/pathogen-profile.yaml"
       ;;
-    missing-required-fields.json)
+    ferrum-core-*|core-*)
       SCHEMA="${ROOT}/schema/core/ferrum-core.yaml"
       ;;
     *)

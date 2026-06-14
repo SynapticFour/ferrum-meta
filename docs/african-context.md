@@ -13,7 +13,7 @@ must be in local languages** (recorded in `H3AfricaIndividual.language_of_consen
 ## H3Africa submission workflow
 
 H3Africa data is deposited at **EGA via H3ABioNet**, not GHGA. The
-[`h3africa-profile`](../schema/profiles/h3africa-profile.yaml) encodes the consortium's data
+[`h3africa-profile`](https://github.com/SynapticFour/ferrum-meta/blob/main/schema/profiles/h3africa-profile.yaml) encodes the consortium's data
 sharing policy, including the **9-month post-archival embargo** and mandatory ethics
 documentation.
 
@@ -54,10 +54,10 @@ documentation.
 9. **Hold embargo locally** — Ferrum stores data on-node until `h3africa_release_date`, then
    triggers federated release via H3ABioNet to EGA.
 
-10. **Export** — Transpiler applies the [H3Africa ↔ EGA crosswalk](../crosswalk/h3africa-ega-crosswalk.md)
+10. **Export** — Transpiler applies the [H3Africa ↔ EGA crosswalk](crosswalk/h3africa-ega-crosswalk.md)
     to produce EGA JSON / Webin XML. No metadata re-entry.
 
-See [`fixtures/valid/h3africa-minimal-submission.yaml`](../fixtures/valid/h3africa-minimal-submission.yaml)
+See [`h3africa-minimal-submission.yaml`](https://github.com/SynapticFour/ferrum-meta/blob/main/fixtures/valid/h3africa-minimal-submission.yaml)
 for a complete valid example.
 
 ---
@@ -128,7 +128,7 @@ team required):
    edit YAML/JSON directly).
 
 2. **Validate offline** — `./scripts/validate-fixture.sh pathogen-sarscov2-kenya.json` confirms
-   the [`pathogen-profile`](../schema/profiles/pathogen-profile.yaml) constraints locally.
+   the [`pathogen-profile`](https://github.com/SynapticFour/ferrum-meta/blob/main/schema/profiles/pathogen-profile.yaml) constraints locally.
 
 3. **Sequence and checksum** — FASTQ files registered with MD5 checksums. Pathogen data uses
    `encryption: NONE` (public data; GHGA human export would reject this value).
@@ -140,11 +140,11 @@ team required):
 Key fields: `Study.type: PATHOGEN_GENOMICS`, `PathogenSample.ncbi_taxon_id`,
 `SurveillanceMetadata.lineage`, `collection_country`, `sequencing_lab`.
 
-See [`fixtures/valid/pathogen-sarscov2-kenya.json`](../fixtures/valid/pathogen-sarscov2-kenya.json)
+See [`pathogen-sarscov2-kenya.json`](https://github.com/SynapticFour/ferrum-meta/blob/main/fixtures/valid/pathogen-sarscov2-kenya.json)
 for a SARS-CoV-2 Nairobi example (taxon 2697049, lineage XBB.1.5, KEMRI-Wellcome Trust).
 
 `Study.type: PATHOGEN_GENOMICS` exports to **ENA**, not EGA — documented in the
-[GHGA ↔ EGA crosswalk](../crosswalk/ghga-ega-crosswalk.md).
+[GHGA ↔ EGA crosswalk](crosswalk/ghga-ega-crosswalk.md).
 
 ---
 
@@ -223,7 +223,7 @@ embargo. ferrum-meta captures this structurally:
 
 The boolean flag enables automated CI and pre-submission checks. The substantive agreement text
 belongs in the data access policy body exported to EGA (`policyDescriptor.policyText` per the
-[H3Africa crosswalk](../crosswalk/h3africa-ega-crosswalk.md)).
+[H3Africa crosswalk](crosswalk/h3africa-ega-crosswalk.md)).
 
 Example benefit-sharing elements to document:
 

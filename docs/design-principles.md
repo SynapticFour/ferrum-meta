@@ -11,7 +11,7 @@ ferrum-meta inverts that assumption: **one canonical record, validated locally, 
 
 ## 1. Archive-agnostic core
 
-The consensus minimum lives in [`ferrum-core.yaml`](../schema/core/ferrum-core.yaml). It is
+The consensus minimum lives in [`ferrum-core.yaml`](https://github.com/SynapticFour/ferrum-meta/blob/main/schema/core/ferrum-core.yaml). It is
 independent of any single archive's naming, required fields, or submission portal quirks.
 
 Archive-specific requirements are added through **profiles**, not forks:
@@ -20,7 +20,7 @@ Archive-specific requirements are added through **profiles**, not forks:
 |-------|------|
 | `ferrum-core` | Minimum fields shared across GHGA, EGA/SRA, FAIR Genomes, and H3Africa |
 | `ghga-profile`, `ega-profile`, … | Extensions for a target archive's extra objects and constraints |
-| Crosswalks | Field-by-field export maps (see [`crosswalk/`](../crosswalk/)) |
+| Crosswalks | Field-by-field export maps (see [crosswalk/](crosswalk/ghga-ega-crosswalk.md)) |
 
 A GHGA submission record can export to EGA without re-entering metadata. The core entities
 (Study, Individual, Sample, Experiment, File, Dataset) stay stable; the transpiler applies
@@ -52,7 +52,7 @@ HANCESTRO defers detailed African population terminology to the [African Populat
 
 Community consent (`COMMUNITY`) has no direct GHGA slot. On export it maps to
 `DUO:0000006` (Health/Medical/Biomedical research). See the
-[GHGA ↔ EGA crosswalk](../crosswalk/ghga-ega-crosswalk.md) for export notes.
+[GHGA ↔ EGA crosswalk](crosswalk/ghga-ega-crosswalk.md) for export notes.
 
 ---
 
@@ -106,7 +106,7 @@ used at submission time, not `main`.
 
 ## 6. Crosswalks, not conversions in-schema
 
-Semantic field mappings live in [`crosswalk/`](../crosswalk/) markdown documents. Runtime
+Semantic field mappings live in [crosswalk/](crosswalk/ghga-ega-crosswalk.md) markdown documents. Runtime
 transpilation (YAML/JSON → GHGA TSV, EGA Webin XML, ENA manifests) belongs in Ferrum tooling,
 not in this schema-only repository.
 
