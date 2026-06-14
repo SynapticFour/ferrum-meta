@@ -1,28 +1,49 @@
-# TODO: Minimal valid ferrum-core submission fixture
-# Replace with a complete example once consensus modelling is done.
+ferrum_meta_version: "0.1.0"
 
-submission_id: "TODO-local-submission-001"
-schema_version: "0.1.0-dev"
+studies:
+  - alias: study001
+    title: "Example population genomics study in East Africa"
+    description: >-
+      A minimum valid ferrum-core submission fixture for offline validation testing.
+      This study captures WGS metadata from a rural field laboratory setting with
+      community consent and Crypt4GH-encrypted FASTQ files.
+    type: POPULATION_GENOMICS
 
-project:
-  title: "TODO — Example genomics study"
-  description: "Placeholder fixture for offline validation testing."
-  contributors:
-    - name: "TODO Contributor"
-      role: "principal investigator"
+individuals:
+  - alias: ind001
+    sex: FEMALE
+    phenotype:
+      - "HP:0000001"
+    ancestry: "HANCESTRO:0005"
+    consent_type: COMMUNITY
+    consent_code: "H3A-CONSENT-2026-001"
 
 samples:
-  - sample_id: "SAMPLE-001"
-    organism: "Homo sapiens"
-    collection_date: "2026-01-15"
+  - alias: sample001
+    individual_alias: ind001
+    tissue_type: "buccal mucosa"
+    biospecimen_type: BUCCAL_SWAB
+
+experiments:
+  - alias: exp001
+    sample_alias: sample001
+    sequencing_platform: BGI
+    library_strategy: WGS
+    library_source: GENOMIC
 
 files:
-  - file_id: "FILE-001"
-    filename: "example_R1.fastq.gz"
-    checksum: "TODO-md5-or-sha256"
-    format: "FASTQ"
+  - alias: file001_R1.fastq.gz
+    format: FASTQ
+    checksum_md5: "d41d8cd98f00b204e9800998ecf8427e"
+    encryption: CRYPT4GH
 
-access_conditions:
-  consent_summary: "TODO — consent description"
-  duo_terms:
-    - "http://purl.obolibrary.org/obo/DUO_0000001"
+datasets:
+  - alias: dataset001
+    title: "Example WGS dataset — community consent cohort"
+    description: >-
+      Controlled-access dataset comprising one Crypt4GH-encrypted FASTQ file
+      from a buccal swab WGS experiment under community consent.
+    file_aliases:
+      - file001_R1.fastq.gz
+    data_use_conditions:
+      - "DUO:0000006"
