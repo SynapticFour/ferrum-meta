@@ -22,5 +22,5 @@ profiles for major archives and federated node deployments.
 
 ## Status
 
-This documentation is scaffold content (Prompt 3.1). Detailed modelling will follow
-in subsequent prompts.
+Schema v0.1.0 with ferrum-core, six archive profiles, crosswalks, CI validation, and JSON
+fixtures. See [Design principles](design-principles.md) for rationale and citation guidance.
