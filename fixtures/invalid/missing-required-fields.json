@@ -1,0 +1,48 @@
+{
+  "ferrum_meta_version": "0.1.0",
+  "studies": [
+    {
+      "alias": "invalid_study",
+      "title": "Invalid study — missing required description field"
+    }
+  ],
+  "individuals": [
+    {
+      "alias": "invalid_ind",
+      "sex": "MALE",
+      "consent_type": "INDIVIDUAL",
+      "phenotype": ["HP:123"]
+    }
+  ],
+  "samples": [
+    {
+      "alias": "invalid_sample",
+      "individual_alias": "invalid_ind",
+      "biospecimen_type": "BLOOD"
+    }
+  ],
+  "experiments": [
+    {
+      "alias": "invalid_exp",
+      "sample_alias": "invalid_sample",
+      "sequencing_platform": "ILLUMINA",
+      "library_strategy": "WGS",
+      "library_source": "GENOMIC"
+    }
+  ],
+  "files": [
+    {
+      "alias": "invalid_file.fastq.gz",
+      "format": "FASTQ",
+      "encryption": "CRYPT4GH"
+    }
+  ],
+  "datasets": [
+    {
+      "alias": "invalid_dataset",
+      "title": "Invalid dataset for negative CI testing",
+      "description": "Dataset present but linked study, individual, and file records contain intentional validation errors for ferrum-core negative testing.",
+      "file_aliases": ["invalid_file.fastq.gz"]
+    }
+  ]
+}

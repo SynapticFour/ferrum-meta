@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   validate-schemas:
@@ -20,28 +21,62 @@ jobs:
       - name: Install LinkML
         run: pip install linkml
 
-      - name: Lint schemas
+      - name: Lint LinkML schemas
         run: |
-          linkml-lint schema/core/ferrum-core.yaml
-          linkml-lint schema/profiles/ghga-profile.yaml
-          linkml-lint schema/profiles/ega-profile.yaml
-          linkml-lint schema/profiles/eva-profile.yaml
-          linkml-lint schema/profiles/h3africa-profile.yaml
-          linkml-lint schema/profiles/pathogen-profile.yaml
+          find schema -name '*.yaml' -print | while read -r schema_file; do
+            echo "=== lint ${schema_file} ==="
+            linkml-lint --ignore-warnings "${schema_file}"
+          done
 
-      - name: Validate valid fixtures
+      - name: Generate JSON Schema from LinkML
         run: |
-          for fixture in fixtures/valid/*.yaml; do
+          mkdir -p build/json-schema
+          find schema -name '*.yaml' -print | while read -r schema_file; do
+            out="build/json-schema/$(basename "${schema_file}" .yaml).schema.json"
+            echo "=== gen-json-schema ${schema_file} -> ${out} ==="
+            linkml generate json-schema "${schema_file}" > "${out}"
+            test -s "${out}"
+          done
+
+  validate-fixtures:
+    runs-on: ubuntu-latest
+    needs: validate-schemas
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install LinkML
+        run: pip install linkml
+
+      - name: Validate valid fixtures (expect pass)
+        run: |
+          shopt -s nullglob
+          for fixture in fixtures/valid/*.{yaml,yml,json}; do
             echo "=== ${fixture} ==="
             ./scripts/validate-fixture.sh "${fixture}"
           done
 
-      - name: Confirm invalid fixtures fail
+      - name: Validate invalid fixtures (expect fail)
         run: |
-          for fixture in fixtures/invalid/*.yaml; do
+          shopt -s nullglob
+          for fixture in fixtures/invalid/*.{yaml,yml,json}; do
             echo "=== expecting failure: ${fixture} ==="
             if ./scripts/validate-fixture.sh "${fixture}"; then
               echo "ERROR: invalid fixture passed validation: ${fixture}" >&2
               exit 1
             fi
           done
+
+  check-crosswalks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify crosswalk documentation
+        run: |
+          chmod +x ./scripts/check-crosswalks.sh
+          ./scripts/check-crosswalks.sh

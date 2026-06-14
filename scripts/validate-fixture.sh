@@ -2,16 +2,10 @@
 # Validate a ferrum-meta fixture against the core schema or an archive profile.
 #
 # Usage:
-#   ./scripts/validate-fixture.sh <fixture.yaml> [schema.yaml] [target_class]
+#   ./scripts/validate-fixture.sh <fixture> [schema.yaml] [target_class]
 #
-# Defaults:
-#   schema.yaml   → inferred from fixture name when possible, else ferrum-core.yaml
-#   target_class  → inferred from schema (FerrumCoreSubmission, GhgaProfileSubmission, …)
-#
-# Examples:
-#   ./scripts/validate-fixture.sh fixtures/valid/ghga-minimal-submission.yaml
-#   ./scripts/validate-fixture.sh fixtures/valid/TODO-minimal-submission.yaml \
-#       schema/core/ferrum-core.yaml FerrumCoreSubmission
+# Supports YAML and JSON fixtures. Schema and target class are inferred from the
+# fixture filename when not provided.
 #
 # Requires: linkml-validate (pip install linkml)
 
@@ -23,7 +17,7 @@ SCHEMA="${2:-}"
 TARGET_CLASS="${3:-}"
 
 if [[ -z "${FIXTURE}" ]]; then
-  echo "Usage: $0 <fixture.yaml> [schema.yaml] [target_class]" >&2
+  echo "Usage: $0 <fixture.yaml|fixture.json> [schema.yaml] [target_class]" >&2
   exit 1
 fi
 
@@ -42,11 +36,17 @@ if [[ -z "${SCHEMA}" ]]; then
     ega-*)
       SCHEMA="${ROOT}/schema/profiles/ega-profile.yaml"
       ;;
+    eva-*)
+      SCHEMA="${ROOT}/schema/profiles/eva-profile.yaml"
+      ;;
     h3africa-*|h3a-*)
       SCHEMA="${ROOT}/schema/profiles/h3africa-profile.yaml"
       ;;
     pathogen-*|path-*)
       SCHEMA="${ROOT}/schema/profiles/pathogen-profile.yaml"
+      ;;
+    missing-required-fields.json)
+      SCHEMA="${ROOT}/schema/core/ferrum-core.yaml"
       ;;
     *)
       SCHEMA="${ROOT}/schema/core/ferrum-core.yaml"
@@ -61,12 +61,12 @@ fi
 
 if [[ -z "${TARGET_CLASS}" ]]; then
   case "$(basename "${SCHEMA}")" in
-    ghga-profile.yaml) TARGET_CLASS="GhgaProfileSubmission" ;;
-    ega-profile.yaml)  TARGET_CLASS="EgaProfileSubmission" ;;
-    eva-profile.yaml)  TARGET_CLASS="EvaProfileSubmission" ;;
+    ghga-profile.yaml)     TARGET_CLASS="GhgaProfileSubmission" ;;
+    ega-profile.yaml)      TARGET_CLASS="EgaProfileSubmission" ;;
+    eva-profile.yaml)      TARGET_CLASS="EvaProfileSubmission" ;;
     h3africa-profile.yaml) TARGET_CLASS="H3AfricaProfileSubmission" ;;
     pathogen-profile.yaml) TARGET_CLASS="PathogenProfileSubmission" ;;
-    *)                 TARGET_CLASS="FerrumCoreSubmission" ;;
+    *)                     TARGET_CLASS="FerrumCoreSubmission" ;;
   esac
 fi
 

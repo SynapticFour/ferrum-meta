@@ -1,0 +1,68 @@
+{
+  "ferrum_meta_version": "0.1.0",
+  "studies": [
+    {
+      "alias": "path_kenya_study",
+      "title": "SARS-CoV-2 genomic surveillance — Nairobi, Kenya",
+      "description": "Pathogen surveillance example for Kenya field response. Public data submitted to ENA/GISAID with offline-first Ferrum node queue-and-upload workflow.",
+      "type": "PATHOGEN_GENOMICS"
+    }
+  ],
+  "pathogen_samples": [
+    {
+      "alias": "path_kenya_sample",
+      "pathogen_name": "Severe acute respiratory syndrome coronavirus 2",
+      "ncbi_taxon_id": "2697049",
+      "collection_date": "2026-02-10",
+      "collection_country": "KE",
+      "collection_region": "Nairobi",
+      "host_species": "Homo sapiens",
+      "passage_history": "Original",
+      "sequencing_lab": "KEMRI-Wellcome Trust",
+      "submitting_lab": "KEMRI-Wellcome Trust",
+      "isolation_source": "CLINICAL"
+    }
+  ],
+  "samples": [
+    {
+      "alias": "path_kenya_lab_sample",
+      "pathogen_sample_alias": "path_kenya_sample",
+      "biospecimen_type": "OTHER",
+      "tissue_type": "nasopharyngeal swab"
+    }
+  ],
+  "experiments": [
+    {
+      "alias": "path_kenya_exp",
+      "sample_alias": "path_kenya_lab_sample",
+      "sequencing_platform": "ILLUMINA",
+      "library_strategy": "WGS",
+      "library_source": "GENOMIC"
+    }
+  ],
+  "files": [
+    {
+      "alias": "path_kenya_reads.fastq.gz",
+      "format": "FASTQ",
+      "checksum_md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "encryption": "NONE"
+    }
+  ],
+  "datasets": [
+    {
+      "alias": "path_kenya_dataset",
+      "title": "SARS-CoV-2 WGS — Nairobi XBB.1.5",
+      "description": "Public pathogen FASTQ for ENA submission. Unencrypted per pathogen profile default for outbreak response data.",
+      "file_aliases": ["path_kenya_reads.fastq.gz"]
+    }
+  ],
+  "surveillance_metadata": [
+    {
+      "pathogen_sample_alias": "path_kenya_sample",
+      "outbreak_name": "Nairobi respiratory surveillance 2026-02",
+      "lineage": "XBB.1.5",
+      "lineage_tool": "Pangolin v4.3"
+    }
+  ],
+  "target_archives": ["ENA", "GISAID"]
+}

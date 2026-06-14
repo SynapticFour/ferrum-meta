@@ -1,0 +1,76 @@
+{
+  "ferrum_meta_version": "0.1.0",
+  "studies": [
+    {
+      "alias": "ghga_study_example",
+      "title": "GHGA minimal example — epilepsy genomics cohort",
+      "description": "Minimal valid GHGA profile example in ferrum-meta JSON format for CI validation and export transpiler testing against GHGA schema v2.2.0.",
+      "type": "WHOLE_GENOME_SEQUENCING"
+    }
+  ],
+  "individuals": [
+    {
+      "alias": "ghga_ind_example",
+      "sex": "FEMALE",
+      "phenotype": ["HP:0001250"],
+      "ancestry": "HANCESTRO:0005",
+      "consent_type": "INDIVIDUAL",
+      "geographical_region": "HANCESTRO:0410"
+    }
+  ],
+  "samples": [
+    {
+      "alias": "ghga_sample_example",
+      "individual_alias": "ghga_ind_example",
+      "tissue_type": "blood",
+      "biospecimen_type": "BLOOD"
+    }
+  ],
+  "experiments": [
+    {
+      "alias": "ghga_exp_example",
+      "sample_alias": "ghga_sample_example",
+      "sequencing_platform": "ILLUMINA",
+      "library_strategy": "WGS",
+      "library_source": "GENOMIC"
+    }
+  ],
+  "files": [
+    {
+      "alias": "ghga_file_R1.fastq.gz",
+      "format": "FASTQ",
+      "checksum_md5": "d41d8cd98f00b204e9800998ecf8427e",
+      "encryption": "CRYPT4GH"
+    }
+  ],
+  "datasets": [
+    {
+      "alias": "ghga_dataset_example",
+      "title": "GHGA minimal WGS dataset — epilepsy cohort",
+      "description": "Single Crypt4GH FASTQ dataset under no-restriction DUO term for GHGA export example.",
+      "file_aliases": ["ghga_file_R1.fastq.gz"],
+      "data_use_conditions": ["DUO:0000004"],
+      "dap_alias": "ghga_dap_example",
+      "study_alias": "ghga_study_example"
+    }
+  ],
+  "data_access_committees": [
+    {
+      "alias": "ghga_dac_example",
+      "name": "University Hospital Epilepsy DAC",
+      "main_contact": "dac-contact@university-hospital.example.org",
+      "members": ["Prof. Neurology Lead"],
+      "institutional_affiliation": "University Hospital Example"
+    }
+  ],
+  "data_access_policies": [
+    {
+      "alias": "ghga_dap_example",
+      "name": "Epilepsy WGS no-restriction policy",
+      "description": "Data access policy for the minimal GHGA example dataset with DUO no restriction.",
+      "data_use_permission": "DUO:0000004",
+      "policy_text": "Data are available without restriction subject to DAC review and signed data access agreement.",
+      "dac_alias": "ghga_dac_example"
+    }
+  ]
+}
