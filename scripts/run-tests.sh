@@ -3,12 +3,17 @@
 #
 # Usage: ./scripts/run-tests.sh [--skip-docs]
 #
-# Requires: pip install -r requirements-dev.txt
+# Requires: make install  (or: pip install -r requirements-dev.txt)
 
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "${ROOT}"
+
+# Prefer project venv when present (created by `make install`).
+if [[ -d "${ROOT}/.venv/bin" ]]; then
+  export PATH="${ROOT}/.venv/bin:${PATH}"
+fi
 
 SKIP_DOCS=false
 for arg in "$@"; do
@@ -20,7 +25,7 @@ done
 
 require_cmd() {
   if ! command -v "$1" &>/dev/null; then
-    echo "Error: ${1} not found. Install with: pip install -r requirements-dev.txt" >&2
+    echo "Error: ${1} not found. Run: make install" >&2
     exit 1
   fi
 }

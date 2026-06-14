@@ -55,9 +55,12 @@ settings without reliable internet connectivity. See
 ```bash
 git clone https://github.com/SynapticFour/ferrum-meta.git
 cd ferrum-meta
-make install
+make install   # creates .venv/ and installs linkml + mkdocs
 make test
 ```
+
+Requires **Python 3.10+** (`python3` on PATH). On macOS, Xcode Command Line Tools or
+Homebrew Python is sufficient — a standalone `pip` command is not required.
 
 Validate a single fixture:
 

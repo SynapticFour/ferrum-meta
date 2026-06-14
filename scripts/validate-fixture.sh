@@ -7,11 +7,16 @@
 # Supports YAML and JSON fixtures. Schema and target class are inferred from the
 # fixture filename when not provided.
 #
-# Requires: linkml-validate (pip install linkml)
+# Requires: make install  (creates .venv with linkml)
 
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if [[ -d "${ROOT}/.venv/bin" ]]; then
+  export PATH="${ROOT}/.venv/bin:${PATH}"
+fi
+
 FIXTURE="${1:-}"
 SCHEMA="${2:-}"
 TARGET_CLASS="${3:-}"
@@ -71,7 +76,7 @@ if [[ -z "${TARGET_CLASS}" ]]; then
 fi
 
 if ! command -v linkml-validate &>/dev/null; then
-  echo "Error: linkml-validate not found. Install with: pip install linkml" >&2
+  echo "Error: linkml-validate not found. Run: make install" >&2
   exit 1
 fi
 

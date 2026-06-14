@@ -8,7 +8,7 @@ fixtures, crosswalks, and review expectations.
 ```bash
 git clone https://github.com/SynapticFour/ferrum-meta.git
 cd ferrum-meta
-make install    # pip install -r requirements-dev.txt
+make install    # creates .venv/ — no standalone pip required
 make test       # full validation suite
 ```
 
