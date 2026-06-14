@@ -42,8 +42,11 @@ if [[ -z "${SCHEMA}" ]]; then
     ega-*)
       SCHEMA="${ROOT}/schema/profiles/ega-profile.yaml"
       ;;
-    eva-*)
-      SCHEMA="${ROOT}/schema/profiles/eva-profile.yaml"
+    h3africa-*|h3a-*)
+      SCHEMA="${ROOT}/schema/profiles/h3africa-profile.yaml"
+      ;;
+    pathogen-*|path-*)
+      SCHEMA="${ROOT}/schema/profiles/pathogen-profile.yaml"
       ;;
     *)
       SCHEMA="${ROOT}/schema/core/ferrum-core.yaml"
@@ -61,6 +64,8 @@ if [[ -z "${TARGET_CLASS}" ]]; then
     ghga-profile.yaml) TARGET_CLASS="GhgaProfileSubmission" ;;
     ega-profile.yaml)  TARGET_CLASS="EgaProfileSubmission" ;;
     eva-profile.yaml)  TARGET_CLASS="EvaProfileSubmission" ;;
+    h3africa-profile.yaml) TARGET_CLASS="H3AfricaProfileSubmission" ;;
+    pathogen-profile.yaml) TARGET_CLASS="PathogenProfileSubmission" ;;
     *)                 TARGET_CLASS="FerrumCoreSubmission" ;;
   esac
 fi

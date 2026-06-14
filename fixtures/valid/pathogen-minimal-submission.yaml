@@ -1,0 +1,62 @@
+ferrum_meta_version: "0.1.0"
+
+studies:
+  - alias: path_study001
+    title: "Pathogen profile fixture — SARS-CoV-2 field surveillance"
+    description: >-
+      Valid pathogen surveillance submission for offline-first field lab workflow.
+      No individual patient data; targets ENA and GISAID public archives per
+      Africa CDC continental genomic surveillance use case.
+    type: PATHOGEN_GENOMICS
+
+pathogen_samples:
+  - alias: path_sample001
+    pathogen_name: "Severe acute respiratory syndrome coronavirus 2"
+    ncbi_taxon_id: "2697049"
+    collection_date: "2026-01-20"
+    collection_country: "NG"
+    collection_region: "Lagos State"
+    host_species: "Homo sapiens"
+    passage_history: "Original"
+    sequencing_lab: "ACEGID Mobile Lab Lagos"
+    submitting_lab: "Africa CDC Regional Reference Laboratory"
+    isolation_source: CLINICAL
+
+samples:
+  - alias: path_lab_sample001
+    pathogen_sample_alias: path_sample001
+    biospecimen_type: OTHER
+    tissue_type: "nasopharyngeal swab"
+
+experiments:
+  - alias: path_exp001
+    sample_alias: path_lab_sample001
+    sequencing_platform: ONT
+    library_strategy: AMPLICON
+    library_source: GENOMIC
+
+files:
+  - alias: path_reads.fastq.gz
+    format: FASTQ
+    checksum_md5: "d41d8cd98f00b204e9800998ecf8427e"
+    encryption: NONE
+
+datasets:
+  - alias: path_dataset001
+    title: "SARS-CoV-2 amplicon sequences — Lagos outbreak response"
+    description: >-
+      Public pathogen dataset for ENA submission. Unencrypted FASTQ acceptable
+      for non-sensitive outbreak response strains.
+    file_aliases:
+      - path_reads.fastq.gz
+
+surveillance_metadata:
+  - pathogen_sample_alias: path_sample001
+    outbreak_name: "Lagos respiratory cluster 2026-01"
+    lineage: "BA.2.86"
+    lineage_tool: "pangolin"
+    gisaid_accession: "EPI_ISL_19000000"
+
+target_archives:
+  - ENA
+  - GISAID

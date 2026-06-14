@@ -26,6 +26,8 @@ jobs:
           linkml-lint schema/profiles/ghga-profile.yaml
           linkml-lint schema/profiles/ega-profile.yaml
           linkml-lint schema/profiles/eva-profile.yaml
+          linkml-lint schema/profiles/h3africa-profile.yaml
+          linkml-lint schema/profiles/pathogen-profile.yaml
 
       - name: Validate valid fixtures
         run: |

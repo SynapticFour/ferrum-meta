@@ -1,0 +1,46 @@
+ferrum_meta_version: "0.1.0"
+
+studies:
+  - alias: path_study_bad
+    title: "Invalid pathogen fixture — missing NCBI taxon ID"
+    description: >-
+      Negative test case: PathogenSample without required ncbi_taxon_id for ENA
+      taxonomy validation.
+    type: PATHOGEN_GENOMICS
+
+pathogen_samples:
+  - alias: path_sample_bad
+    pathogen_name: "Unknown pathogen"
+    collection_date: "2026-02-01"
+    collection_country: "KE"
+    host_species: "Homo sapiens"
+    sequencing_lab: "Field Lab"
+    submitting_lab: "KEMRI"
+    isolation_source: CLINICAL
+
+samples:
+  - alias: path_lab_sample_bad
+    pathogen_sample_alias: path_sample_bad
+    biospecimen_type: OTHER
+
+experiments:
+  - alias: path_exp_bad
+    sample_alias: path_lab_sample_bad
+    sequencing_platform: ONT
+    library_strategy: WGS
+    library_source: GENOMIC
+
+files:
+  - alias: path_reads_bad.fastq.gz
+    format: FASTQ
+    checksum_md5: "d41d8cd98f00b204e9800998ecf8427e"
+
+datasets:
+  - alias: path_dataset_bad
+    title: "Invalid pathogen dataset"
+    description: Missing ncbi_taxon_id on pathogen sample.
+    file_aliases:
+      - path_reads_bad.fastq.gz
+
+target_archives:
+  - ENA

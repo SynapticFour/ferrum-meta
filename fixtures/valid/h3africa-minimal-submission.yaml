@@ -1,0 +1,64 @@
+ferrum_meta_version: "0.1.0"
+
+studies:
+  - alias: h3a_study001
+    title: "H3Africa profile fixture — population genomics via H3ABioNet"
+    description: >-
+      Valid H3Africa profile submission for EGA deposition via H3ABioNet. Includes
+      consent record with 9-month embargo date, ethics approval, and benefit sharing
+      documentation per H3Africa data sharing policy.
+    type: POPULATION_GENOMICS
+
+individuals:
+  - alias: h3a_ind001
+    sex: FEMALE
+    phenotype:
+      - "HP:0000001"
+    ancestry: "HANCESTRO:0005"
+    consent_type: BROAD
+    country_of_recruitment: "KE"
+    language_of_consent: "en"
+    population_group: "HANCESTRO:0410"
+    consent_record_alias: h3a_consent001
+
+samples:
+  - alias: h3a_sample001
+    individual_alias: h3a_ind001
+    biospecimen_type: BLOOD
+
+experiments:
+  - alias: h3a_exp001
+    sample_alias: h3a_sample001
+    sequencing_platform: ILLUMINA
+    library_strategy: WGS
+    library_source: GENOMIC
+
+files:
+  - alias: h3a_file001.cram
+    format: CRAM
+    checksum_md5: "098f6bcd4621d373cade4e832627b4f6"
+    encryption: CRYPT4GH
+
+datasets:
+  - alias: h3a_dataset001
+    title: "H3Africa WGS dataset under 9-month embargo"
+    description: >-
+      Controlled-access dataset held locally on Ferrum node until
+      h3africa_release_date, then released via H3ABioNet to EGA.
+    file_aliases:
+      - h3a_file001.cram
+    data_use_conditions:
+      - "DUO:0000006"
+
+consent_records:
+  - alias: h3a_consent001
+    consent_type: BROAD
+    h3africa_release_date: "2027-03-15"
+    ethics_committee: "KEMRI Scientific and Ethics Review Unit"
+    ethics_approval_number: "KEMRI/SERU/CVR/001/2026"
+    ethics_country: "KE"
+    benefit_sharing_agreement: true
+
+h3abionet_archive_id: "H3ABIONET-2026-001"
+ega_submission_status: IN_PREPARATION
+target_archive: EGA

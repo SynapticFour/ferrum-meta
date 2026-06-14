@@ -1,0 +1,43 @@
+ferrum_meta_version: "0.1.0"
+
+studies:
+  - alias: h3a_study_bad
+    title: "Invalid H3Africa fixture — missing consent record"
+    description: >-
+      Negative test case: H3Africa profile submission without required
+      consent_records block.
+    type: POPULATION_GENOMICS
+
+individuals:
+  - alias: h3a_ind_bad
+    sex: MALE
+    consent_type: BROAD
+    country_of_recruitment: "ZA"
+
+samples:
+  - alias: h3a_sample_bad
+    individual_alias: h3a_ind_bad
+    biospecimen_type: SALIVA
+
+experiments:
+  - alias: h3a_exp_bad
+    sample_alias: h3a_sample_bad
+    sequencing_platform: BGI
+    library_strategy: WGS
+    library_source: GENOMIC
+
+files:
+  - alias: h3a_file_bad.fastq.gz
+    format: FASTQ
+    checksum_md5: "d41d8cd98f00b204e9800998ecf8427e"
+    encryption: CRYPT4GH
+
+datasets:
+  - alias: h3a_dataset_bad
+    title: "Invalid H3Africa dataset without consent record"
+    description: Missing consent_records — should fail H3Africa profile validation.
+    file_aliases:
+      - h3a_file_bad.fastq.gz
+
+ega_submission_status: NOT_STARTED
+target_archive: EGA
