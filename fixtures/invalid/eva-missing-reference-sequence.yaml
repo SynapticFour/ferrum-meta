@@ -1,0 +1,41 @@
+ferrum_meta_version: "0.1.0"
+
+studies:
+  - alias: eva_study_bad
+    title: "Invalid EVA fixture — missing reference sequence"
+    description: >-
+      Negative test case: EvaFile without required reference_sequence INSDC
+      accession for eva-sub-cli assembly_check compatibility.
+    type: POPULATION_GENOMICS
+
+individuals:
+  - alias: eva_ind_bad
+    sex: UNKNOWN
+    consent_type: BROAD
+
+samples:
+  - alias: eva_sample_bad
+    individual_alias: eva_ind_bad
+    biospecimen_type: BLOOD
+
+experiments:
+  - alias: eva_exp_bad
+    sample_alias: eva_sample_bad
+    sequencing_platform: ILLUMINA
+    library_strategy: WGS
+    library_source: GENOMIC
+
+files:
+  - alias: eva_variants_bad.vcf.gz
+    format: VCF
+    checksum_md5: "5d41402abc4b2a76b9719d911017c592"
+    encryption: NONE
+    genotype_format: NONE
+
+datasets:
+  - alias: eva_dataset_bad
+    title: "Invalid EVA VCF without assembly accession"
+    description: >-
+      EVA negative fixture: missing reference_sequence and invalid genotype_format NONE.
+    file_aliases:
+      - eva_variants_bad.vcf.gz

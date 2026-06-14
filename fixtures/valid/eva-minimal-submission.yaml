@@ -1,0 +1,46 @@
+ferrum_meta_version: "0.1.0"
+
+studies:
+  - alias: eva_study001
+    title: "EVA profile fixture — population variant release"
+    description: >-
+      Valid EVA profile submission fixture with VCF file metadata for eva-sub-cli
+      assembly_check and evidence_type validation workflows.
+    type: POPULATION_GENOMICS
+
+individuals:
+  - alias: eva_ind001
+    sex: UNKNOWN
+    consent_type: BROAD
+
+samples:
+  - alias: eva_sample001
+    individual_alias: eva_ind001
+    biospecimen_type: BLOOD
+
+experiments:
+  - alias: eva_exp001
+    sample_alias: eva_sample001
+    sequencing_platform: ILLUMINA
+    library_strategy: WGS
+    library_source: GENOMIC
+
+files:
+  - alias: eva_variants.vcf.gz
+    format: VCF
+    checksum_md5: "5d41402abc4b2a76b9719d911017c592"
+    encryption: NONE
+    reference_sequence: "GCA_000001405.15"
+    vcf_version: "4.3"
+    genotype_format: ALLELE_FREQUENCIES_IN_INFO
+
+datasets:
+  - alias: eva_dataset001
+    title: "EVA population allele frequency VCF"
+    description: >-
+      EVA dataset fixture containing a single population VCF with allele
+      frequencies in INFO fields (no per-sample FORMAT genotypes).
+    file_aliases:
+      - eva_variants.vcf.gz
+    data_use_conditions:
+      - "DUO:0000004"

@@ -1,10 +1,29 @@
+# ferrum-meta GHGA profile — extends ferrum-core for GHGA metadata schema v2.2.0 export.
+#
+# submission_checklist:
+#   - step_id: metadata_schema_validation
+#     title: Validate metadata against GHGA schema v2.2.0
+#     automated: true
+#   - step_id: file_integrity_and_encryption
+#     title: Verify file checksums and Crypt4GH encryption
+#     automated: true
+#   - step_id: dac_dap_registration
+#     title: Register Data Access Committee and Data Access Policy
+#     automated: true
+#   - step_id: legal_and_ethics_attestation
+#     title: Sign submission agreement and ethics attestation
+#     automated: false
+#   - step_id: ghga_curator_review
+#     title: GHGA HelpDesk curator review and accessioning
+#     automated: false
+
 id: https://w3id.org/ferrum-meta/profiles/ghga
 name: ferrum-ghga-profile
 title: Ferrum Meta — GHGA Profile
 description: >-
-  TODO: Extensions and constraints mapping ferrum-core to the German Human
-  Genome-Phenome Archive (GHGA) submission metadata schema.
-version: 0.1.0-dev
+  Extensions mapping ferrum-core to the German Human Genome-Phenome Archive (GHGA)
+  submission metadata schema v2.2.0 for export compatibility.
+version: 0.1.0
 license: https://www.apache.org/licenses/LICENSE-2.0
 
 imports:
@@ -13,30 +32,320 @@ imports:
 prefixes:
   FERRUM: https://w3id.org/ferrum-meta/
   GHGA: https://w3id.org/GHGA/
+  DUO: http://purl.obolibrary.org/obo/DUO_
+  HANCESTRO: http://purl.obolibrary.org/obo/HANCESTRO_
   linkml: https://w3id.org/linkml/
 
 default_prefix: FERRUM
 
+default_curi_maps:
+  - obo_context
+  - semweb_context
+
 classes:
-  GHGAProfileSubmission:
+  GhgaProfileSubmission:
+    is_a: FerrumCoreSubmission
     description: >-
-      TODO: Profile root — import ferrum-core and add GHGA-specific slots
-      (e.g. GHGA accession fields, German data protection annotations).
-    is_a: FerrumSubmission
+      GHGA export submission bundle. Extends ferrum-core with DAC/DAP governance
+      entities and GHGA-typed datasets, individuals, and analyses required by
+      GHGA-Submission-Metadata-Schema v2.2.0.
     slots:
-      - ghga_accession
-      - data_use_category
+      - data_access_committees
+      - data_access_policies
+      - analyses
     slot_usage:
-      ghga_accession:
+      studies:
+        range: Study
+      individuals:
+        range: GhgaIndividual
+      datasets:
+        range: GhgaDataset
+      data_access_committees:
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        minimum_cardinality: 1
+      data_access_policies:
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        minimum_cardinality: 1
+      analyses:
         required: false
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+
+  DataAccessCommittee:
+    mixins:
+      - IdentifiedByAliasMixin
+    description: >-
+      Data Access Committee (DAC). Maps to GHGA DataAccessCommittee and EGA DAC
+      on federated export. Members grant access after consent and legal review.
+    slots:
+      - name
+      - main_contact
+      - members
+      - institutional_affiliation
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      name:
+        required: true
+      main_contact:
+        required: true
+        pattern: "^(?!.*@(gmail|googlemail)\\.com$)(?!.*@yahoo\\.).+@.+\\..+$"
+      members:
+        required: true
+        minimum_cardinality: 1
+      institutional_affiliation:
+        required: true
+
+  DataAccessPolicy:
+    mixins:
+      - IdentifiedByAliasMixin
+    description: >-
+      Data Access Policy (DAP). Maps to GHGA DataAccessPolicy (policy_text,
+      data_use_permission, data_use_modifiers, data_access_committee).
+    slots:
+      - name
+      - description
+      - data_use_permission
+      - data_use_modifiers
+      - policy_text
+      - dac_alias
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      name:
+        required: true
+      description:
+        required: true
+      data_use_permission:
+        required: true
+        pattern: "^DUO:\\d{7}$"
+      policy_text:
+        required: true
+      dac_alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+
+  GhgaDataset:
+    is_a: Dataset
+    description: >-
+      GHGA Dataset with mandatory study and DAP linkage. Maps to GHGA Dataset
+      (data_access_policy, study slots).
+    slots:
+      - dap_alias
+      - study_alias
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      dap_alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      study_alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+
+  GhgaIndividual:
+    is_a: Individual
+    description: >-
+      GHGA Individual with geographical region. Maps to GHGA Individual
+      geographical_region_id / geographical_region_term (HANCESTRO/NCIT descendants).
+    slots:
+      - geographical_region
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      geographical_region:
+        recommended: true
+
+  GhgaAnalysis:
+    mixins:
+      - IdentifiedByAliasMixin
+    description: >-
+      GHGA Analysis combining Analysis and AnalysisMethod workflow metadata.
+      Maps to GHGA Analysis + AnalysisMethod (workflow_name, workflow_version,
+      research_data_files as inputs).
+    slots:
+      - title
+      - type
+      - workflow_name
+      - workflow_version
+      - input_file_aliases
+      - output_file_aliases
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      title:
+        required: true
+      type:
+        required: true
+        range: GhgaAnalysisType
+      workflow_name:
+        required: true
+      input_file_aliases:
+        required: true
+        minimum_cardinality: 1
+      output_file_aliases:
+        required: true
+        minimum_cardinality: 1
+
+enums:
+  GhgaAnalysisType:
+    description: >-
+      GHGA analysis type. Simplified from GHGA Analysis.type and common
+      bioinformatics workflow categories for export transpilation.
+    permissible_values:
+      VARIANT_CALLING:
+        description: Variant calling from aligned reads (VCF/gVCF output).
+      SEQUENCE_ALIGNMENT:
+        description: Read alignment to reference (BAM/CRAM output).
+      QUANTIFICATION:
+        description: Expression or feature quantification (e.g. RNA-seq counts).
+      STRUCTURAL_VARIANT_CALLING:
+        description: Structural variant detection workflows.
+      ASSEMBLY:
+        description: De novo or reference-guided assembly.
+      OTHER:
+        description: Analysis type not captured by controlled vocabulary.
+
+  GhgaAdminChecklistStep:
+    description: >-
+      GHGA submission admin steps for ferrum compass readiness report ADMIN ITEMS.
+      See schema header submission_checklist YAML for the canonical ordered list.
+    permissible_values:
+      METADATA_SCHEMA_VALIDATION:
+        description: >-
+          Validate metadata against GHGA schema v2.2.0. automated: true
+      FILE_INTEGRITY_AND_ENCRYPTION:
+        description: >-
+          Verify file checksums and Crypt4GH encryption. automated: true
+      DAC_DAP_REGISTRATION:
+        description: >-
+          Register Data Access Committee and Data Access Policy. automated: true
+      LEGAL_AND_ETHICS_ATTESTATION:
+        description: >-
+          Sign submission agreement and ethics attestation. automated: false
+      GHGA_CURATOR_REVIEW:
+        description: >-
+          GHGA HelpDesk curator review and accessioning. automated: false
 
 slots:
-  ghga_accession:
-    description: TODO — GHGA dataset or project accession when known.
+  data_access_committees:
+    description: Data Access Committees governing datasets in this submission.
+    range: DataAccessCommittee
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  data_access_policies:
+    description: Data Access Policies applied to GHGA datasets.
+    range: DataAccessPolicy
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  analyses:
+    description: GHGA Analysis entities (optional when only raw data submitted).
+    range: GhgaAnalysis
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  name:
+    description: Human-readable name for DAC or DAP. GHGA DataAccessPolicy.name.
     range: string
 
-  data_use_category:
-    description: TODO — GHGA data use category mapping.
+  main_contact:
+    description: >-
+      Institutional contact email for the DAC. GHGA DataAccessCommittee.email.
+      Must not be a personal webmail provider (gmail, yahoo, etc.).
     range: string
 
-# TODO: Complete slot mappings against ghga-metadata-schema/src/schema/submission.yaml
+  members:
+    description: >-
+      DAC member names or institutional contact identifiers. GHGA does not model
+      members explicitly; required by ferrum-meta for African multi-stakeholder
+      governance transparency.
+    range: string
+    multivalued: true
+
+  institutional_affiliation:
+    description: >-
+      Primary institutional affiliation of the DAC. GHGA DataAccessCommittee.institute.
+    range: string
+
+  data_use_permission:
+    description: >-
+      Primary DUO data use permission term. GHGA data_use_permission_id /
+      data_use_permission_term (descendant of DUO:0000001).
+    range: string
+
+  data_use_modifiers:
+    description: >-
+      Optional DUO data use modifier terms. GHGA data_use_modifier_ids /
+      data_use_modifier_terms (descendant of DUO:0000017).
+    range: string
+    multivalued: true
+    pattern: "^DUO:\\d{7}$"
+
+  policy_text:
+    description: >-
+      Full policy text or Data Access Agreement. GHGA DataAccessPolicy.policy_text
+      (required).
+    range: string
+
+  dac_alias:
+    description: >-
+      Foreign key to DataAccessCommittee.alias. GHGA DataAccessPolicy.data_access_committee.
+    range: string
+
+  dap_alias:
+    description: >-
+      Foreign key to DataAccessPolicy.alias. GHGA Dataset.data_access_policy.
+    range: string
+
+  study_alias:
+    description: >-
+      Foreign key to Study.alias. GHGA Dataset.study.
+    range: string
+
+  geographical_region:
+    description: >-
+      Geographical region of the individual (HANCESTRO or NCIT:C25464 descendant).
+      GHGA Individual.geographical_region_id / geographical_region_term.
+    range: string
+
+  workflow_name:
+    description: >-
+      Workflow or pipeline name. GHGA AnalysisMethod.workflow_name.
+    range: string
+
+  workflow_version:
+    description: >-
+      Workflow version. GHGA AnalysisMethod.workflow_version (recommended).
+    range: string
+
+  input_file_aliases:
+    description: >-
+      Input file aliases (typically Research Data Files). GHGA Analysis.research_data_files.
+    range: string
+    multivalued: true
+    pattern: "^[a-zA-Z0-9._-]+$"
+
+  output_file_aliases:
+    description: >-
+      Output file aliases (typically Process Data Files). GHGA ProcessDataFile
+      produced by Analysis.
+    range: string
+    multivalued: true
+    pattern: "^[a-zA-Z0-9._-]+$"

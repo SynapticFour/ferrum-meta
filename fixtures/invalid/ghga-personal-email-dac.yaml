@@ -1,0 +1,59 @@
+ferrum_meta_version: "0.1.0"
+
+studies:
+  - alias: ghga_study_bad
+    title: "Invalid GHGA fixture — personal email DAC contact"
+    description: >-
+      Negative test case: DataAccessCommittee.main_contact uses a personal webmail
+      address which violates the GHGA profile institutional email constraint.
+    type: POPULATION_GENOMICS
+
+individuals:
+  - alias: ghga_ind_bad
+    sex: FEMALE
+    consent_type: INDIVIDUAL
+
+samples:
+  - alias: ghga_sample_bad
+    individual_alias: ghga_ind_bad
+    biospecimen_type: SALIVA
+
+experiments:
+  - alias: ghga_exp_bad
+    sample_alias: ghga_sample_bad
+    sequencing_platform: ONT
+    library_strategy: WGS
+    library_source: GENOMIC
+
+files:
+  - alias: ghga_file_bad.fastq.gz
+    format: FASTQ
+    checksum_md5: "d41d8cd98f00b204e9800998ecf8427e"
+    encryption: CRYPT4GH
+
+datasets:
+  - alias: ghga_dataset_bad
+    title: "Invalid GHGA dataset missing proper DAC linkage"
+    description: >-
+      Dataset present but DAC uses invalid personal email — should fail GHGA
+      profile validation on main_contact pattern.
+    file_aliases:
+      - ghga_file_bad.fastq.gz
+    dap_alias: ghga_dap_bad
+    study_alias: ghga_study_bad
+
+data_access_committees:
+  - alias: ghga_dac_bad
+    name: "Invalid DAC with personal email"
+    main_contact: "researcher@gmail.com"
+    members:
+      - "Researcher One"
+    institutional_affiliation: "Example Institute"
+
+data_access_policies:
+  - alias: ghga_dap_bad
+    name: "Policy linked to invalid DAC"
+    description: "Policy text for negative GHGA profile validation testing."
+    data_use_permission: "DUO:0000006"
+    policy_text: "Access under HMB only after DAC review."
+    dac_alias: ghga_dac_bad

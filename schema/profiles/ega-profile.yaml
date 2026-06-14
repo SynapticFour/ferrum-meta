@@ -1,11 +1,13 @@
+# ferrum-meta EGA profile — extends ferrum-core for EGA Webin-CLI XML submission model.
+# Maps to EGA JSON metadata schemas and webin-xml transformation targets.
+
 id: https://w3id.org/ferrum-meta/profiles/ega
 name: ferrum-ega-profile
 title: Ferrum Meta — EGA/ENA Profile
 description: >-
-  TODO: Extensions mapping ferrum-core to European Genome-phenome Archive (EGA)
-  and European Nucleotide Archive (ENA) submission requirements, including
-  Webin-CLI XML fields.
-version: 0.1.0-dev
+  Extensions mapping ferrum-core to European Genome-phenome Archive (EGA) and
+  European Nucleotide Archive (ENA) Webin-CLI XML submission requirements.
+version: 0.1.0
 license: https://www.apache.org/licenses/LICENSE-2.0
 
 imports:
@@ -15,35 +17,293 @@ prefixes:
   FERRUM: https://w3id.org/ferrum-meta/
   EGA: https://www.ebi.ac.uk/ega/
   ENA: https://www.ebi.ac.uk/ena/
+  DUO: http://purl.obolibrary.org/obo/DUO_
   linkml: https://w3id.org/linkml/
 
 default_prefix: FERRUM
 
+default_curi_maps:
+  - obo_context
+  - semweb_context
+
 classes:
-  EGAProfileSubmission:
+  EgaProfileSubmission:
+    is_a: FerrumCoreSubmission
     description: >-
-      TODO: Profile root — EGA study/sample/experiment/run hierarchy and
-      DAC/policy references.
-    is_a: FerrumSubmission
+      EGA Webin submission bundle. Adds DAC, policy, and EGA-typed study/dataset
+      entities for transpilation to webin-xml (EGA.dac.xsd, EGA.policy.xsd, etc.).
     slots:
-      - ega_study_id
-      - dac_id
-      - policy_id
+      - ega_dacs
+      - ega_policies
     slot_usage:
-      ega_study_id:
-        required: false
+      studies:
+        range: EgaStudy
+      datasets:
+        range: EgaDataset
+      ega_dacs:
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        minimum_cardinality: 1
+      ega_policies:
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        minimum_cardinality: 1
+
+  EgaDac:
+    mixins:
+      - IdentifiedByAliasMixin
+    description: >-
+      EGA Data Access Committee. Maps to EGA.DAC.json and webin-xml DAC_SET/DAC
+      (TITLE, dacContacts.mainContact, SUBMITTER_ID / centerName as webin_id).
+    slots:
+      - title
+      - description
+      - webin_id
+      - main_contact_email
+      - main_contact_name
+      - institutional_affiliation
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      title:
+        required: true
+      webin_id:
+        required: true
+      main_contact_email:
+        required: true
+      institutional_affiliation:
+        required: true
+
+  EgaPolicy:
+    mixins:
+      - IdentifiedByAliasMixin
+    description: >-
+      EGA access policy (Data Access Agreement). Maps to EGA.policy.json
+      policyDescriptor.policyText / policyReference and webin-xml POLICY.
+    slots:
+      - title
+      - description
+      - policy_text
+      - policy_url
+      - dac_alias
+      - data_use_permission
+      - data_use_modifiers
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      title:
+        required: true
+      policy_text:
+        required: true
+      dac_alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+
+  EgaStudy:
+    is_a: Study
+    description: >-
+      EGA Study with ENA-inherited study type vocabulary. Maps to EGA.study.json
+      studyTypes and Webin STUDY XML.
+    slots:
+      - ega_study_types
+      - ega_accession
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      ega_study_types:
+        required: true
+        minimum_cardinality: 1
+
+  EgaDataset:
+    is_a: Dataset
+    description: >-
+      EGA Dataset with ENA-inherited dataset type vocabulary. Maps to
+      EGA.dataset.json datasetType and controlled-access file groupings.
+    slots:
+      - ega_dataset_types
+      - policy_alias
+      - study_alias
+      - ega_accession
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      ega_dataset_types:
+        required: true
+        minimum_cardinality: 1
+      policy_alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+      study_alias:
+        required: true
+        pattern: "^[a-zA-Z0-9_-]+$"
+
+enums:
+  EgaStudyType:
+    description: >-
+      EGA/ENA study type controlled vocabulary. Inherited from ENA study types
+      (EGA.study.json studyTypes enum).
+    permissible_values:
+      WHOLE_GENOME_SEQUENCING:
+        description: ENA CV — whole genome sequencing
+      METAGENOMICS:
+        description: ENA CV — metagenomics
+      TRANSCRIPTOME_ANALYSIS:
+        description: ENA CV — transcriptome analysis
+      RESEQUENCING:
+        description: ENA CV — resequencing
+      EPIGENETICS:
+        description: ENA CV — epigenetics
+      SYNTHETIC_GENOMICS:
+        description: ENA CV — synthetic genomics
+      FORENSIC:
+        description: ENA CV — forensic
+      PALEO_GENOMICS:
+        description: ENA CV — paleo-genomics
+      GENE_REGULATION:
+        description: ENA CV — gene regulation
+      CANCER_GENOMICS:
+        description: ENA CV — cancer genomics
+      POPULATION_GENOMICS:
+        description: ENA CV — population genomics
+      RNA_SEQ:
+        description: ENA CV — RNASeq
+      EXOME_SEQUENCING:
+        description: ENA CV — exome sequencing
+      POOLED_CLONE_SEQUENCING:
+        description: ENA CV — pooled clone sequencing
+      COVID_19:
+        description: ENA CV — COVID-19
+      XENOGRAFT:
+        description: ENA CV — xenograft
+
+  EgaDatasetType:
+    description: >-
+      EGA/ENA dataset type controlled vocabulary (EGA.dataset.json datasetType enum).
+    permissible_values:
+      WHOLE_GENOME_SEQUENCING:
+        description: ENA CV — whole genome sequencing
+      EXOME_SEQUENCING:
+        description: ENA CV — exome sequencing
+      GENOTYPING_BY_ARRAY:
+        description: ENA CV — genotyping by array
+      TRANSCRIPTOME_PROFILING_BY_HTS:
+        description: ENA CV — transcriptome profiling by high-throughput sequencing
+      TRANSCRIPTOME_PROFILING_BY_ARRAY:
+        description: ENA CV — transcriptome profiling by array
+      AMPLICON_SEQUENCING:
+        description: ENA CV — amplicon sequencing
+      METHYLATION_BINDING_DOMAIN_SEQUENCING:
+        description: ENA CV — methylation binding domain sequencing
+      METHYLATION_PROFILING_BY_HTS:
+        description: ENA CV — methylation profiling by high-throughput sequencing
+      PHENOTYPE_INFORMATION:
+        description: ENA CV — phenotype information
+      GENOMIC_VARIANT_CALLING:
+        description: ENA CV — genomic variant calling
+      CHROMATIN_ACCESSIBILITY_PROFILING_BY_HTS:
+        description: ENA CV — chromatin accessibility profiling by high-throughput sequencing
+      HISTONE_MODIFICATION_PROFILING_BY_HTS:
+        description: ENA CV — histone modification profiling by high-throughput sequencing
+      CHIP_SEQ:
+        description: ENA CV — chip-Seq
+      STUDY_SUMMARY_INFORMATION:
+        description: ENA CV — study summary information
 
 slots:
-  ega_study_id:
-    description: TODO — EGA study accession (e.g. EGAS…).
+  ega_dacs:
+    description: EGA Data Access Committees for this submission.
+    range: EgaDac
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  ega_policies:
+    description: EGA access policies for this submission.
+    range: EgaPolicy
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  webin_id:
+    description: >-
+      Webin-CLI center name or registered DAC submitter ID (SUBMITTER_ID namespace).
+      Used in webin-xml DAC_REF refcenter and objectId.centerName.
     range: string
 
-  dac_id:
-    description: TODO — Data Access Committee identifier.
+  main_contact_email:
+    description: >-
+      Main DAC contact email. EGA.DAC.json dacContacts.mainContact.email.
     range: string
 
-  policy_id:
-    description: TODO — EGA access policy identifier.
+  main_contact_name:
+    description: >-
+      Main DAC contact name. EGA.DAC.json dacContacts.mainContact.name.
     range: string
 
-# TODO: Cross-reference ega-metadata-schema and webin-xml XSD fields
+  policy_url:
+    description: >-
+      Public URL hosting policy text. EGA.policy.json policyDescriptor.policyReference.
+    range: uritype
+
+  policy_alias:
+    description: >-
+      Foreign key to EgaPolicy.alias. EGA dataset→policy relationship.
+    range: string
+
+  study_alias:
+    description: >-
+      Foreign key to EgaStudy.alias. EGA dataset→study relationship.
+    range: string
+    pattern: "^[a-zA-Z0-9_-]+$"
+
+  ega_study_types:
+    description: >-
+      One or more EGA study types (ENA CV). EGA.study.json studyTypes array.
+    range: EgaStudyType
+    multivalued: true
+
+  ega_dataset_types:
+    description: >-
+      EGA dataset types describing file content. EGA.dataset.json datasetType CV.
+    range: EgaDatasetType
+    multivalued: true
+
+  ega_accession:
+    description: >-
+      Assigned EGA accession when registered (EGAS, EGAD, EGAC, EGAP prefixes).
+    range: string
+
+  institutional_affiliation:
+    description: >-
+      Institutional affiliation of the DAC. EGA.DAC.json contact organization.
+    range: string
+
+  policy_text:
+    description: >-
+      Full policy / Data Access Agreement text. EGA.policy.json policyDescriptor.policyText.
+    range: string
+
+  dac_alias:
+    description: >-
+      Foreign key to EgaDac.alias. EGA policy→DAC and Webin DAC_REF relationship.
+    range: string
+
+  data_use_permission:
+    description: >-
+      Primary DUO data use permission term for the EGA policy.
+    range: string
+    pattern: "^DUO:\\d{7}$"
+
+  data_use_modifiers:
+    description: Optional DUO data use modifier terms for the EGA policy.
+    range: string
+    multivalued: true
+    pattern: "^DUO:\\d{7}$"

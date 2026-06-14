@@ -1,10 +1,24 @@
+# ferrum-meta EVA profile — extends ferrum-core for European Variation Archive submission.
+# EVA accepts VCF/BCF only. Validated by eva-sub-cli (assembly_check, vcf_check).
+#
+# submission_checklist:
+#   - step_id: insdc_reference_sequence_check
+#     title: INSDC reference sequence check
+#     automated: true
+#   - step_id: eva_sub_cli_validation
+#     title: VCF passes eva-sub-cli validation
+#     automated: true
+#   - step_id: human_data_consent_statement
+#     title: Consent statement for human data
+#     automated: false
+
 id: https://w3id.org/ferrum-meta/profiles/eva
 name: ferrum-eva-profile
 title: Ferrum Meta — EVA Profile
 description: >-
-  TODO: Extensions for European Variation Archive (EVA) variant submission
-  metadata, including population and assembly context.
-version: 0.1.0-dev
+  Extensions for European Variation Archive (EVA) variant submission. EVA accepts
+  VCF/BCF files only; validated via eva-sub-cli assembly and VCF checks.
+version: 0.1.0
 license: https://www.apache.org/licenses/LICENSE-2.0
 
 imports:
@@ -18,30 +32,89 @@ prefixes:
 default_prefix: FERRUM
 
 classes:
-  EVAProfileSubmission:
+  EvaProfileSubmission:
+    is_a: FerrumCoreSubmission
     description: >-
-      TODO: Profile root — variant file references, assembly accession,
-      population descriptors, and EVA project metadata.
-    is_a: FerrumSubmission
-    slots:
-      - eva_project_accession
-      - reference_assembly
-      - variant_file_format
+      EVA variant submission bundle. All files must be VCF or BCF with INSDC
+      reference sequence metadata for eva-sub-cli assembly_check.
     slot_usage:
-      reference_assembly:
+      files:
+        range: EvaFile
+        required: true
+        minimum_cardinality: 1
+
+  EvaFile:
+    is_a: File
+    description: >-
+      EVA variant file (VCF or BCF). Extends ferrum-core File with reference
+      assembly and genotype evidence metadata required by eva-sub-cli.
+    slots:
+      - reference_sequence
+      - vcf_version
+      - genotype_format
+    slot_usage:
+      alias:
+        required: true
+        pattern: "^[a-zA-Z0-9._-]+$"
+      format:
+        required: true
+      reference_sequence:
+        required: true
+        pattern: "^(GCA|GCF|CM|LR|NZ)_[0-9]+(\\.[0-9]+)?$"
+      genotype_format:
         required: true
 
+enums:
+  EvaGenotypeFormat:
+    description: >-
+      Variant evidence type in the VCF. EVA requires either genotypes in FORMAT
+      columns or allele frequencies in INFO (eva-sub-cli evidence_type_check).
+      NONE is invalid for EVA submission and should fail validation.
+    permissible_values:
+      GENOTYPES_PRESENT:
+        description: >-
+          Sample genotypes present in FORMAT fields (GT and related). Requires
+          sampleInVCF metadata when human samples included (eva-sub-cli sample_check).
+      ALLELE_FREQUENCIES_IN_INFO:
+        description: >-
+          Population allele frequencies in INFO fields (e.g. AF, AC). No per-sample
+          FORMAT genotypes required.
+      NONE:
+        description: >-
+          No genotype or allele frequency evidence. Invalid for EVA submission;
+          eva-sub-cli evidence_type_check will fail.
+
+  EvaAdminChecklistStep:
+    description: >-
+      EVA submission admin steps for ferrum compass readiness report. See schema
+      header submission_checklist YAML for the canonical ordered list.
+    permissible_values:
+      INSDC_REFERENCE_SEQUENCE_CHECK:
+        description: >-
+          INSDC reference sequence check (eva-sub-cli assembly_check). automated: true
+      EVA_SUB_CLI_VALIDATION:
+        description: >-
+          VCF passes eva-sub-cli validation (vcf_check, metadata_check). automated: true
+      HUMAN_DATA_CONSENT_STATEMENT:
+        description: >-
+          Consent statement for human data. automated: false
+
 slots:
-  eva_project_accession:
-    description: TODO — EVA project accession when registered.
+  reference_sequence:
+    description: >-
+      INSDC or RefSeq assembly accession for VCF contigs (e.g. GCA_000001405.28).
+      Required by eva-sub-cli assembly_check (all contigs must match INSDC report).
     range: string
 
-  reference_assembly:
-    description: TODO — INSDC or RefSeq assembly accession (e.g. GCF_…).
+  vcf_version:
+    description: >-
+      VCF format version (e.g. 4.2, 4.3). Recommended; validated by eva-sub-cli
+      vcf_check / vcf-validator.
     range: string
 
-  variant_file_format:
-    description: TODO — VCF or other variant call format descriptor.
-    range: string
-
-# TODO: Cross-reference eva-sub-cli submission templates
+  genotype_format:
+    description: >-
+      Declares whether the VCF carries per-sample genotypes or population allele
+      frequencies. EVA requires GENOTYPES_PRESENT or ALLELE_FREQUENCIES_IN_INFO;
+      maps to eva-sub-cli evidence_type (genotype | allele_frequency).
+    range: EvaGenotypeFormat

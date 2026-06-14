@@ -20,17 +20,19 @@ jobs:
       - name: Install LinkML
         run: pip install linkml
 
-      - name: Lint core schema
-        run: linkml-lint schema/core/ferrum-core.yaml || true
-        # TODO: Remove '|| true' once schema passes lint (scaffold phase)
+      - name: Lint schemas
+        run: |
+          linkml-lint schema/core/ferrum-core.yaml
+          linkml-lint schema/profiles/ghga-profile.yaml
+          linkml-lint schema/profiles/ega-profile.yaml
+          linkml-lint schema/profiles/eva-profile.yaml
 
       - name: Validate valid fixtures
         run: |
           for fixture in fixtures/valid/*.yaml; do
             echo "=== ${fixture} ==="
-            ./scripts/validate-fixture.sh "${fixture}" || true
+            ./scripts/validate-fixture.sh "${fixture}"
           done
-          # TODO: Remove '|| true' once fixtures are complete and schema is stable
 
       - name: Confirm invalid fixtures fail
         run: |
@@ -41,5 +43,3 @@ jobs:
               exit 1
             fi
           done
-        continue-on-error: true
-        # TODO: Enable strict failure once invalid fixtures are properly rejected
