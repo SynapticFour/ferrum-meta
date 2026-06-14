@@ -1,0 +1,49 @@
+id: https://w3id.org/ferrum-meta/profiles/ega
+name: ferrum-ega-profile
+title: Ferrum Meta — EGA/ENA Profile
+description: >-
+  TODO: Extensions mapping ferrum-core to European Genome-phenome Archive (EGA)
+  and European Nucleotide Archive (ENA) submission requirements, including
+  Webin-CLI XML fields.
+version: 0.1.0-dev
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+imports:
+  - ../core/ferrum-core
+
+prefixes:
+  FERRUM: https://w3id.org/ferrum-meta/
+  EGA: https://www.ebi.ac.uk/ega/
+  ENA: https://www.ebi.ac.uk/ena/
+  linkml: https://w3id.org/linkml/
+
+default_prefix: FERRUM
+
+classes:
+  EGAProfileSubmission:
+    description: >-
+      TODO: Profile root — EGA study/sample/experiment/run hierarchy and
+      DAC/policy references.
+    is_a: FerrumSubmission
+    slots:
+      - ega_study_id
+      - dac_id
+      - policy_id
+    slot_usage:
+      ega_study_id:
+        required: false
+
+slots:
+  ega_study_id:
+    description: TODO — EGA study accession (e.g. EGAS…).
+    range: string
+
+  dac_id:
+    description: TODO — Data Access Committee identifier.
+    range: string
+
+  policy_id:
+    description: TODO — EGA access policy identifier.
+    range: string
+
+# TODO: Cross-reference ega-metadata-schema and webin-xml XSD fields

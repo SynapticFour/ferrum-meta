@@ -1,0 +1,52 @@
+id: https://w3id.org/ferrum-meta/profiles/pathogen
+name: ferrum-pathogen-profile
+title: Ferrum Meta — Pathogen Surveillance Profile
+description: >-
+  TODO: Extensions for pathogen genomics surveillance workflows, including
+  Africa CDC and public health outbreak response metadata.
+version: 0.1.0-dev
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+imports:
+  - ../core/ferrum-core
+
+prefixes:
+  FERRUM: https://w3id.org/ferrum-meta/
+  GENEPIO: http://purl.obolibrary.org/obo/GENEPIO_
+  linkml: https://w3id.org/linkml/
+
+default_prefix: FERRUM
+
+classes:
+  PathogenProfileSubmission:
+    description: >-
+      TODO: Profile root — outbreak linkage, pathogen species/lineage, surveillance
+      programme identifiers, and Africa CDC reporting fields.
+    is_a: FerrumSubmission
+    slots:
+      - pathogen_species
+      - outbreak_id
+      - surveillance_programme
+      - collection_site_type
+    slot_usage:
+      pathogen_species:
+        required: true
+
+slots:
+  pathogen_species:
+    description: TODO — NCBI Taxonomy ID or species name for the pathogen.
+    range: string
+
+  outbreak_id:
+    description: TODO — Outbreak or cluster identifier for epidemiological linkage.
+    range: string
+
+  surveillance_programme:
+    description: TODO — National or regional surveillance programme name/code.
+    range: string
+
+  collection_site_type:
+    description: TODO — e.g. clinic, community, border screening, wastewater.
+    range: string
+
+# TODO: Reference Africa CDC pathogen genomics metadata requirements

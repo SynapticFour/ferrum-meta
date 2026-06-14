@@ -1,0 +1,35 @@
+site_name: ferrum-meta
+site_description: Archive-agnostic genomics metadata schema for federated archive nodes
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: deep orange
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.expand
+    - toc.integrate
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Design Principles: design-principles.md
+  - African Context: african-context.md
+  - FEGA Compatibility: fega-compatibility.md
+  - Referenced Ontologies: ../schema/ontologies/referenced-ontologies.md
+  - Protocol References: protocol-references/README.md
+  - Crosswalks:
+      - GHGA ↔ EGA: ../crosswalk/ghga-ega-crosswalk.md
+      - H3Africa ↔ EGA: ../crosswalk/h3africa-ega-crosswalk.md
+
+markdown_extensions:
+  - attr_list
+  - toc:
+      permalink: true
+
+docs_dir: docs
+repo_url: https://github.com/SynapticFour/ferrum-meta
+repo_name: SynapticFour/ferrum-meta

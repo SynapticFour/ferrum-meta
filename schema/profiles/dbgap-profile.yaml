@@ -1,0 +1,47 @@
+id: https://w3id.org/ferrum-meta/profiles/dbgap
+name: ferrum-dbgap-profile
+title: Ferrum Meta — dbGaP/NIH Profile
+description: >-
+  TODO: Extensions mapping ferrum-core to NIH database of Genotypes and Phenotypes
+  (dbGaP) study, subject, and sample metadata requirements.
+version: 0.1.0-dev
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+imports:
+  - ../core/ferrum-core
+
+prefixes:
+  FERRUM: https://w3id.org/ferrum-meta/
+  DBGAP: https://www.ncbi.nlm.nih.gov/gap/
+  linkml: https://w3id.org/linkml/
+
+default_prefix: FERRUM
+
+classes:
+  DbGaPProfileSubmission:
+    description: >-
+      TODO: Profile root — dbGaP study accession, consent group, subject/sample
+      pedigree fields, and NIH IC (institute) metadata.
+    is_a: FerrumSubmission
+    slots:
+      - dbgap_study_accession
+      - consent_group
+      - nih_institute
+    slot_usage:
+      dbgap_study_accession:
+        required: false
+
+slots:
+  dbgap_study_accession:
+    description: TODO — dbGaP study accession (phs…).
+    range: string
+
+  consent_group:
+    description: TODO — dbGaP consent group identifier.
+    range: string
+
+  nih_institute:
+    description: TODO — NIH institute or centre code.
+    range: string
+
+# TODO: Map to dbGaP study registration and SRA metadata exchange fields

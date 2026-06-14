@@ -1,0 +1,7 @@
+# TODO: Invalid fixture — missing required fields
+# Should fail validation against ferrum-core once the validator is wired up.
+
+submission_id: "TODO-invalid-submission-001"
+schema_version: "0.1.0-dev"
+
+# Missing required 'project' and 'samples' slots intentionally.

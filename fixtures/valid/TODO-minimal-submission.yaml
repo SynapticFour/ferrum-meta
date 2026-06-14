@@ -1,0 +1,28 @@
+# TODO: Minimal valid ferrum-core submission fixture
+# Replace with a complete example once consensus modelling is done.
+
+submission_id: "TODO-local-submission-001"
+schema_version: "0.1.0-dev"
+
+project:
+  title: "TODO — Example genomics study"
+  description: "Placeholder fixture for offline validation testing."
+  contributors:
+    - name: "TODO Contributor"
+      role: "principal investigator"
+
+samples:
+  - sample_id: "SAMPLE-001"
+    organism: "Homo sapiens"
+    collection_date: "2026-01-15"
+
+files:
+  - file_id: "FILE-001"
+    filename: "example_R1.fastq.gz"
+    checksum: "TODO-md5-or-sha256"
+    format: "FASTQ"
+
+access_conditions:
+  consent_summary: "TODO — consent description"
+  duo_terms:
+    - "http://purl.obolibrary.org/obo/DUO_0000001"

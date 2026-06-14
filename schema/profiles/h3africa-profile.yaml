@@ -1,0 +1,48 @@
+id: https://w3id.org/ferrum-meta/profiles/h3africa
+name: ferrum-h3africa-profile
+title: Ferrum Meta — H3Africa Profile
+description: >-
+  TODO: Extensions for H3Africa community consent models, biobank linkage,
+  and data sharing policy requirements.
+version: 0.1.0-dev
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+imports:
+  - ../core/ferrum-core
+
+prefixes:
+  FERRUM: https://w3id.org/ferrum-meta/
+  H3AFRICA: https://w3id.org/h3africa/
+  linkml: https://w3id.org/linkml/
+
+default_prefix: FERRUM
+
+classes:
+  H3AfricaProfileSubmission:
+    description: >-
+      TODO: Profile root — H3Africa-specific consent tiers, community engagement,
+      and biorepository identifiers.
+    is_a: FerrumSubmission
+    slots:
+      - h3africa_project_code
+      - community_consent_model
+      - biobank_id
+    slot_usage:
+      h3africa_project_code:
+        required: false
+
+slots:
+  h3africa_project_code:
+    description: TODO — H3Africa project or cohort identifier.
+    range: string
+
+  community_consent_model:
+    description: >-
+      TODO — Community consent framework (e.g. tiered sharing, recontact required).
+    range: string
+
+  biobank_id:
+    description: TODO — Linked biorepository or biobank accession.
+    range: string
+
+# TODO: Align with H3Africa Data Archive policy and hancestro ancestry terms

@@ -1,0 +1,47 @@
+id: https://w3id.org/ferrum-meta/profiles/eva
+name: ferrum-eva-profile
+title: Ferrum Meta — EVA Profile
+description: >-
+  TODO: Extensions for European Variation Archive (EVA) variant submission
+  metadata, including population and assembly context.
+version: 0.1.0-dev
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+imports:
+  - ../core/ferrum-core
+
+prefixes:
+  FERRUM: https://w3id.org/ferrum-meta/
+  EVA: https://www.ebi.ac.uk/eva/
+  linkml: https://w3id.org/linkml/
+
+default_prefix: FERRUM
+
+classes:
+  EVAProfileSubmission:
+    description: >-
+      TODO: Profile root — variant file references, assembly accession,
+      population descriptors, and EVA project metadata.
+    is_a: FerrumSubmission
+    slots:
+      - eva_project_accession
+      - reference_assembly
+      - variant_file_format
+    slot_usage:
+      reference_assembly:
+        required: true
+
+slots:
+  eva_project_accession:
+    description: TODO — EVA project accession when registered.
+    range: string
+
+  reference_assembly:
+    description: TODO — INSDC or RefSeq assembly accession (e.g. GCF_…).
+    range: string
+
+  variant_file_format:
+    description: TODO — VCF or other variant call format descriptor.
+    range: string
+
+# TODO: Cross-reference eva-sub-cli submission templates

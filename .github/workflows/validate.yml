@@ -1,0 +1,45 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install LinkML
+        run: pip install linkml
+
+      - name: Lint core schema
+        run: linkml-lint schema/core/ferrum-core.yaml || true
+        # TODO: Remove '|| true' once schema passes lint (scaffold phase)
+
+      - name: Validate valid fixtures
+        run: |
+          for fixture in fixtures/valid/*.yaml; do
+            echo "=== ${fixture} ==="
+            ./scripts/validate-fixture.sh "${fixture}" || true
+          done
+          # TODO: Remove '|| true' once fixtures are complete and schema is stable
+
+      - name: Confirm invalid fixtures fail
+        run: |
+          for fixture in fixtures/invalid/*.yaml; do
+            echo "=== expecting failure: ${fixture} ==="
+            if ./scripts/validate-fixture.sh "${fixture}"; then
+              echo "ERROR: invalid fixture passed validation: ${fixture}" >&2
+              exit 1
+            fi
+          done
+        continue-on-error: true
+        # TODO: Enable strict failure once invalid fixtures are properly rejected

@@ -1,0 +1,21 @@
+# Local reference clones — never commit upstream schemas or symlinks to them
+sources/ghga-metadata-schema
+sources/ega-metadata-schema
+sources/webin-xml
+sources/fairgenomes-semantic-model
+
+# Python / LinkML tooling
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# MkDocs build output
+site/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/

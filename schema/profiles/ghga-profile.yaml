@@ -1,0 +1,42 @@
+id: https://w3id.org/ferrum-meta/profiles/ghga
+name: ferrum-ghga-profile
+title: Ferrum Meta — GHGA Profile
+description: >-
+  TODO: Extensions and constraints mapping ferrum-core to the German Human
+  Genome-Phenome Archive (GHGA) submission metadata schema.
+version: 0.1.0-dev
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+imports:
+  - ../core/ferrum-core
+
+prefixes:
+  FERRUM: https://w3id.org/ferrum-meta/
+  GHGA: https://w3id.org/GHGA/
+  linkml: https://w3id.org/linkml/
+
+default_prefix: FERRUM
+
+classes:
+  GHGAProfileSubmission:
+    description: >-
+      TODO: Profile root — import ferrum-core and add GHGA-specific slots
+      (e.g. GHGA accession fields, German data protection annotations).
+    is_a: FerrumSubmission
+    slots:
+      - ghga_accession
+      - data_use_category
+    slot_usage:
+      ghga_accession:
+        required: false
+
+slots:
+  ghga_accession:
+    description: TODO — GHGA dataset or project accession when known.
+    range: string
+
+  data_use_category:
+    description: TODO — GHGA data use category mapping.
+    range: string
+
+# TODO: Complete slot mappings against ghga-metadata-schema/src/schema/submission.yaml

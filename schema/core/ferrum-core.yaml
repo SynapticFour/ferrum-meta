@@ -1,0 +1,206 @@
+id: https://w3id.org/ferrum-meta/core
+name: ferrum-core
+title: Ferrum Meta — Core Schema
+description: >-
+  TODO: Consensus minimum metadata model for archive-agnostic genomics submissions.
+  Must be usable offline in field settings and mappable to GHGA, EGA, EVA, H3Africa,
+  and Africa CDC pathogen workflows.
+version: 0.1.0-dev
+license: https://www.apache.org/licenses/LICENSE-2.0
+
+imports:
+  - linkml:types
+
+prefixes:
+  FERRUM: https://w3id.org/ferrum-meta/
+  linkml: https://w3id.org/linkml/
+  DUO: http://purl.obolibrary.org/obo/duo/
+  EFO: http://www.ebi.ac.uk/efo/EFO_
+  OBI: http://purl.obolibrary.org/obo/OBI_
+  SIO: http://semanticscience.org/resource/SIO_
+
+default_prefix: FERRUM
+default_range: string
+
+default_curi_maps:
+  - obo_context
+  - semweb_context
+
+classes:
+  FerrumSubmission:
+    description: >-
+      TODO: Root container for a ferrum-meta submission bundle.
+      Offline-first: must serialise to a single portable artefact (YAML/JSON).
+    slots:
+      - submission_id
+      - schema_version
+      - project
+      - samples
+      - files
+      - access_conditions
+    slot_usage:
+      submission_id:
+        required: true
+      schema_version:
+        required: true
+      project:
+        required: true
+        inlined: true
+      samples:
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      files:
+        required: false
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      access_conditions:
+        required: false
+        inlined: true
+
+  Project:
+    description: TODO — Study / project metadata (title, description, contributors).
+    slots:
+      - title
+      - description
+      - contributors
+    slot_usage:
+      title:
+        required: true
+
+  Sample:
+    description: TODO — Biological or environmental specimen metadata.
+    slots:
+      - sample_id
+      - organism
+      - collection_date
+      - attributes
+    slot_usage:
+      sample_id:
+        required: true
+        identifier: true
+
+  DataFile:
+    description: TODO — Sequencing or analysis file reference (checksum, format, path).
+    slots:
+      - file_id
+      - filename
+      - checksum
+      - format
+    slot_usage:
+      file_id:
+        required: true
+        identifier: true
+      filename:
+        required: true
+
+  AccessConditions:
+    description: TODO — DUO-aligned access and consent constraints.
+    slots:
+      - duo_terms
+      - consent_summary
+    slot_usage:
+      duo_terms:
+        required: false
+        multivalued: true
+
+  Contributor:
+    description: TODO — Person or organisation contributing to the project.
+    slots:
+      - name
+      - role
+      - orcid
+
+  Attribute:
+    description: TODO — Extensible key/value pair for domain-specific annotations.
+    slots:
+      - key
+      - value
+
+slots:
+  submission_id:
+    description: TODO — Unique submission identifier within the local archive node.
+    range: string
+    required: true
+
+  schema_version:
+    description: ferrum-meta schema version used to author this submission.
+    range: string
+    required: true
+
+  title:
+    range: string
+
+  description:
+    range: string
+
+  contributors:
+    range: Contributor
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  sample_id:
+    range: string
+
+  organism:
+    description: TODO — NCBI Taxonomy or equivalent.
+    range: string
+
+  collection_date:
+    range: date
+
+  attributes:
+    range: Attribute
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  file_id:
+    range: string
+
+  filename:
+    range: string
+
+  checksum:
+    description: TODO — MD5 or SHA256 checksum for offline integrity verification.
+    range: string
+
+  format:
+    description: TODO — EDAM or INSDC format term.
+    range: string
+
+  project:
+    range: Project
+
+  samples:
+    range: Sample
+
+  files:
+    range: DataFile
+
+  access_conditions:
+    range: AccessConditions
+
+  duo_terms:
+    range: uritype
+
+  consent_summary:
+    range: string
+
+  name:
+    range: string
+
+  role:
+    range: string
+
+  orcid:
+    range: uritype
+
+  key:
+    range: string
+
+  value:
+    range: string
