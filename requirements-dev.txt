@@ -1,3 +1,5 @@
 # Development and CI dependencies for ferrum-meta validation.
-linkml~=1.9.0
+# Pinned for reproducible CI (linkml 1.9.x + Python 3.12).
+linkml==1.9.6
+linkml-runtime==1.9.5
 mkdocs-material~=9.5.0
