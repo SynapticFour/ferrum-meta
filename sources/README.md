@@ -28,8 +28,8 @@ git clone --depth 1 https://github.com/fairgenomes/fairgenomes-semantic-model.gi
 If you maintain a consolidated source tree locally, symlink instead of cloning:
 
 ```bash
-# Example: sibling directory ferrum-meta-sources (adjust path to your checkout)
-SRC="../ferrum-meta-sources"
+# Example: ferrum-meta-sources checkout beside SynapticFour/ (adjust to your layout)
+SRC="../../ferrum-meta-sources"
 ln -sf "${SRC}/ghga/ghga-metadata-schema" ghga-metadata-schema
 ln -sf "${SRC}/ega-ena/ega-metadata-schema" ega-metadata-schema
 ln -sf "${SRC}/ega-ena/webin-xml" webin-xml
