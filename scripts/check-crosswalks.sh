@@ -39,5 +39,3 @@ check_entities "${GHGA_EGA}" \
 
 check_entities "${H3A_EGA}" \
   H3AfricaProfileSubmission ConsentRecord H3AfricaIndividual Study Sample Experiment File Dataset
-
-echo "Crosswalk checks passed."

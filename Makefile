@@ -16,21 +16,25 @@ help:
 	@echo "  make docs      Build documentation site"
 	@echo "  make clean     Remove build artefacts and .venv"
 
-install: $(BIN)/python
-	$(BIN)/pip install -U pip
-	$(BIN)/pip install -r requirements-dev.txt
+install: $(VENV)/.deps-installed
+	@echo "Dependencies ready in .venv/"
+
+$(VENV)/.deps-installed: requirements-dev.txt | $(BIN)/python
+	@$(BIN)/pip install -q -U pip
+	@$(BIN)/pip install -q -r requirements-dev.txt
+	@touch $@
 
 $(BIN)/python:
-	$(PYTHON) -m venv $(VENV)
+	@$(PYTHON) -m venv $(VENV)
 
 test: install
-	./scripts/run-tests.sh
+	@./scripts/run-tests.sh
 
 validate: install
-	./scripts/run-tests.sh --skip-docs
+	@./scripts/run-tests.sh --skip-docs
 
 docs: install
-	$(BIN)/mkdocs build --strict
+	@$(BIN)/mkdocs build --strict
 
 clean:
 	rm -rf build/ site/ $(VENV)

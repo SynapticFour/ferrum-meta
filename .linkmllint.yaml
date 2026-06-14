@@ -1,0 +1,11 @@
+# ferrum-meta LinkML linter configuration.
+# Extends LinkML recommended rules; disables naming rules that conflict with
+# archive-aligned SCREAMING_SNAKE enums (GHGA/EGA convention).
+extends: recommended
+rules:
+  standard_naming:
+    level: disabled
+  canonical_prefixes:
+    level: disabled
+  recommended:
+    level: disabled

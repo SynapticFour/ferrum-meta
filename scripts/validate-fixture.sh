@@ -13,8 +13,17 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# shellcheck source=_env.sh
+source "${ROOT}/scripts/_env.sh"
+
 if [[ -d "${ROOT}/.venv/bin" ]]; then
   export PATH="${ROOT}/.venv/bin:${PATH}"
+fi
+
+QUIET=false
+if [[ "${1:-}" == "--quiet" ]]; then
+  QUIET=true
+  shift
 fi
 
 FIXTURE="${1:-}"
@@ -80,5 +89,10 @@ if ! command -v linkml-validate &>/dev/null; then
   exit 1
 fi
 
-echo "Validating ${FIXTURE} against ${SCHEMA} (target: ${TARGET_CLASS}) ..."
+if [[ "${QUIET}" != true ]]; then
+  echo "Validating ${FIXTURE} against ${SCHEMA} (target: ${TARGET_CLASS}) ..."
+fi
 linkml-validate -s "${SCHEMA}" -C "${TARGET_CLASS}" "${FIXTURE}"
+if [[ "${QUIET}" != true ]]; then
+  echo "No issues found"
+fi

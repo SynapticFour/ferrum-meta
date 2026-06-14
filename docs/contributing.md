@@ -18,6 +18,12 @@ Run schema and fixture checks without building docs:
 make validate
 ```
 
+Verbose output (full linkml-lint and validation messages):
+
+```bash
+./scripts/run-tests.sh --verbose
+```
+
 ## What to change where
 
 | Change type | Location | Also update |
@@ -31,7 +37,7 @@ make validate
 ## Schema conventions
 
 - **LinkML YAML** — same language as GHGA for interoperability
-- **Enum naming** — `SCREAMING_SNAKE_CASE` (ferrum-meta convention; CI uses `--ignore-warnings` for lint naming rules)
+- **Enum naming** — `SCREAMING_SNAKE_CASE` (ferrum-meta convention; see `.linkmllint.yaml`)
 - **Profiles import core** — extend with `is_a: FerrumCoreSubmission`, do not fork entity definitions
 - **Version** — bump `version:` in schema YAML and `ferrum_meta_version` in fixtures together
 
