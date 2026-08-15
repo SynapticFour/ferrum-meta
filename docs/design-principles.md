@@ -97,7 +97,7 @@ Every ferrum-meta release is:
 
 **Citation format:**
 
-> Senf A. (2026). ferrum-meta v0.1.0. Zenodo. https://doi.org/10.5281/zenodo.XXXXXX
+> Cite the git tag of this repository. No Zenodo DOI has been issued yet — do not invent one.
 
 Replace the DOI placeholder when the Zenodo record is published. Cite the specific version
 used at submission time, not `main`.

@@ -1,22 +1,17 @@
-# SynapticFour GA4GH stack
+# Synaptic Four — this repo in the portfolio
 
-Six repositories implement a coherent on-premises GA4GH platform. This file is
-**mirrored** across stack repos so readers can navigate between projects without
-relearning structure.
+Four **products**, two free **ambassadors**, Ferrum **companions**, and **proof** repos. Glue is GA4GH; Solum extends into clinical data. **Not a bundle SKU.** Canonical map: [Ferrum PORTFOLIO.md](https://github.com/SynapticFour/Ferrum/blob/main/docs/PORTFOLIO.md).
 
-**You are here:** [ferrum-meta](https://github.com/SynapticFour/ferrum-meta) —
-metadata schema (LinkML core + archive profiles, crosswalks, fixtures).
+**You are here:** [ferrum-meta](https://github.com/SynapticFour/ferrum-meta) — **comes with Ferrum**, not sold separately. LinkML schema + archive profiles. No runtime.
 
 ## Repositories
 
-| Repository | Role | License |
-|------------|------|---------|
-| [ga4gh-infra](https://github.com/SynapticFour/ga4gh-infra) | OIDC broker, visa registry, DUO, ADS, service registry | Apache-2.0 |
-| [Ferrum](https://github.com/SynapticFour/Ferrum) | DRS, WES, TES, TRS, Beacon, htsget, Crypt4GH gateway | BUSL-1.1 |
-| **ferrum-meta** | Archive-agnostic genomics metadata schema (this repo) | Apache-2.0 |
-| [Ferrum-Lab-Kit](https://github.com/SynapticFour/Ferrum-Lab-Kit) | `lab-kit` profiles, compose generation, edge install | BUSL-1.1 |
-| [Ferrum-GA4GH-Demo](https://github.com/SynapticFour/Ferrum-GA4GH-Demo) | `./run` benchmark and co-deploy scenarios | Apache-2.0 |
-| [HelixTest](https://github.com/SynapticFour/HelixTest) | `helixtest` conformance suite | Apache-2.0 |
+| Kind | Repository | Role | License |
+|------|------------|------|---------|
+| With Ferrum | **ferrum-meta** (this repo) | Metadata interchange schemas | Apache-2.0 |
+| Product | [Ferrum](https://github.com/SynapticFour/Ferrum) | Runtime store / validation | BUSL-1.1 |
+| Product | [ga4gh-infra](https://github.com/SynapticFour/ga4gh-infra) | Identity plane | Apache-2.0 |
+| Ambassador | [HelixTest](https://github.com/SynapticFour/HelixTest) | Conformance CLI | Apache-2.0 |
 
 ## Ownership boundaries
 

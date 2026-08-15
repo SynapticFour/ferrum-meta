@@ -8,7 +8,7 @@
 
 **Archive-agnostic genomics metadata for federated Ferrum nodes.**
 
-ferrum-meta is the metadata schema layer for a world where every genomics research
+ferrum-meta is a **Ferrum companion** (schema only — not sold separately) for archive-agnostic genomics metadata.
 institution — from a university hospital in Stuttgart to a field lab in Nairobi —
 can be its own federated archive node, while participating seamlessly in the global
 genomics data ecosystem.
@@ -97,7 +97,7 @@ and JSON/YAML fixtures. dbGaP profile is a stub pending consensus modelling.
 
 ## Citation
 
-> Senf A. (2026). ferrum-meta v0.1.0. Zenodo. https://doi.org/10.5281/zenodo.XXXXXX
+> Cite the git tag of this repository. No Zenodo DOI has been issued yet — do not invent one.
 
 (DOI placeholder — assign on first Zenodo release.)
 
