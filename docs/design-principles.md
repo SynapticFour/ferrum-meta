@@ -97,7 +97,7 @@ Every ferrum-meta release is:
 
 **Citation format:**
 
-> Cite the git tag of this repository. No Zenodo DOI has been issued yet — do not invent one.
+> Cite the git tag of this repository. Schema **0.1.0** is dated **2026-06-14**. No Zenodo DOI has been issued — do not invent one.
 
 Replace the DOI placeholder when the Zenodo record is published. Cite the specific version
 used at submission time, not `main`.

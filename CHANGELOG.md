@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `scripts/export-profile.sh` — GHGA/EGA starter bundle (same YAML Ferrum `ferrum meta export` writes)
+- `scripts/export-profile.sh` — GHGA/EGA **starter** bundle (same YAML as Ferrum `ferrum meta export --starter`). Live DRS ids: Ferrum `ferrum meta export` without `--starter`.
 - Unified test runner (`scripts/run-tests.sh`, `make test`) and pinned dev dependencies
 - SynapticFour stack doc (`docs/ECOSYSTEM.md`), contributing guide, Makefile, CI badge
 - MkDocs symlinks for crosswalks and ontology docs (strict build in CI)

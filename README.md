@@ -105,7 +105,7 @@ dbGaP is out of scope until there is a real mapping (the stub profile was remove
 
 ## Citation
 
-> Cite the git tag of this repository. No Zenodo DOI has been issued yet — do not invent one.
+> Cite the git tag of this repository. Schema **0.1.0** is dated **2026-06-14**. No Zenodo DOI has been issued — do not invent one. Live GHGA/EGA YAML with DRS object ids is `ferrum meta export` in Ferrum (this repo stays schema-only).
 
 ## Documentation
 
