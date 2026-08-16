@@ -8,7 +8,7 @@
 
 **Archive-agnostic genomics metadata for federated Ferrum nodes.**
 
-ferrum-meta is a **Ferrum companion** (schema only — not sold separately) for archive-agnostic genomics metadata.
+ferrum-meta is a **Ferrum companion** (schema only — not sold separately) for archive-agnostic genomics metadata. Any
 institution — from a university hospital in Stuttgart to a field lab in Nairobi —
 can be its own federated archive node, while participating seamlessly in the global
 genomics data ecosystem.
@@ -41,7 +41,7 @@ settings without reliable internet connectivity. See
 | Path | Purpose |
 |------|---------|
 | `schema/core/` | Consensus minimum model (`ferrum-core.yaml` v0.1.0) |
-| `schema/profiles/` | Archive extensions (GHGA, EGA, H3Africa, pathogen, EVA, dbGaP stub) |
+| `schema/profiles/` | Archive extensions (GHGA, EGA, H3Africa, pathogen, EVA) |
 | `schema/ontologies/` | Referenced ontology documentation |
 | `fixtures/valid/` | Examples that must pass validation |
 | `fixtures/invalid/` | Negative test cases (CI must reject) |
@@ -69,6 +69,18 @@ Validate a single fixture:
 ./scripts/validate-fixture.sh fixtures/valid/pathogen-sarscov2-kenya.json
 ```
 
+### Export a GHGA or EGA starter bundle
+
+```bash
+./scripts/export-profile.sh ghga ./my-ghga-bundle.yaml
+./scripts/export-profile.sh ega ./my-ega-bundle.yaml
+# same starter from Ferrum, if you already have the CLI:
+#   ferrum meta export --profile ghga --output ./my-ghga-bundle.yaml
+```
+
+Replace aliases/checksums with your DRS objects, then re-run `validate-fixture.sh`.
+dbGaP is **not** modelled here (stub removed). Use GHGA/EGA/H3Africa/pathogen/EVA.
+
 Build documentation:
 
 ```bash
@@ -88,12 +100,8 @@ Optional: clone upstream reference schemas into `sources/` — see
 | `h3africa-profile.yaml` | EGA via H3ABioNet | `H3AfricaProfileSubmission` |
 | `pathogen-profile.yaml` | ENA / GISAID | `PathogenProfileSubmission` |
 | `eva-profile.yaml` | EVA | `EvaProfileSubmission` |
-| `dbgap-profile.yaml` | dbGaP (stub) | `DbGaPProfileSubmission` |
 
-## Status
-
-**v0.1.0** — ferrum-core with six implemented profiles, crosswalks, CI validation,
-and JSON/YAML fixtures. dbGaP profile is a stub pending consensus modelling.
+dbGaP is out of scope until there is a real mapping (the stub profile was removed).
 
 ## Citation
 

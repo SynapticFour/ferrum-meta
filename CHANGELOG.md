@@ -9,9 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `scripts/export-profile.sh` — GHGA/EGA starter bundle (same YAML Ferrum `ferrum meta export` writes)
 - Unified test runner (`scripts/run-tests.sh`, `make test`) and pinned dev dependencies
 - SynapticFour stack doc (`docs/ECOSYSTEM.md`), contributing guide, Makefile, CI badge
 - MkDocs symlinks for crosswalks and ontology docs (strict build in CI)
+
+### Removed
+
+- `schema/profiles/dbgap-profile.yaml` stub (no mapping; GHGA/EGA/H3Africa/pathogen/EVA remain)
 
 ### Changed
 
@@ -22,7 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- `dbgap-profile.yaml`: inherit `FerrumCoreSubmission` (was invalid `FerrumSubmission`)
 - `ega-profile.yaml`: `policy_url` range `uri` (was undefined `uritype`)
 
 ## [0.1.0] - 2026-06-14
