@@ -9,8 +9,9 @@ OUT="${2:-}"
 case "$PROFILE" in
   ghga) SRC="$ROOT/fixtures/valid/ghga-minimal-submission.yaml" ;;
   ega) SRC="$ROOT/fixtures/valid/ega-minimal-submission.yaml" ;;
+  h3africa) SRC="$ROOT/fixtures/valid/h3africa-minimal-submission.yaml" ;;
   *)
-    echo "usage: $0 ghga|ega [output.yaml]" >&2
+    echo "usage: $0 ghga|ega|h3africa [output.yaml]" >&2
     exit 2
     ;;
 esac

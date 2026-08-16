@@ -13,9 +13,10 @@ institution — from a university hospital in Stuttgart to a field lab in Nairob
 can be its own federated archive node, while participating seamlessly in the global
 genomics data ecosystem.
 
-> **Scope:** This repository contains schema, documentation, fixtures, and crosswalks
-> only. Validators, transpilers, and upload queues live in
-> [Ferrum](https://github.com/SynapticFour/Ferrum).
+> **Scope:** Schema, documentation, fixtures, crosswalks, and a **starter CLI**
+> (`scripts/ferrum_meta_cli.py`) that validates and writes GHGA/EGA/H3Africa YAML.
+> Live DRS listing and upload queues live in
+> [Ferrum](https://github.com/SynapticFour/Ferrum). This CLI does **not** submit to EGA/GHGA.
 
 ## SynapticFour GA4GH stack
 
@@ -74,8 +75,12 @@ Validate a single fixture:
 ```bash
 ./scripts/export-profile.sh ghga ./my-ghga-bundle.yaml
 ./scripts/export-profile.sh ega ./my-ega-bundle.yaml
+./scripts/export-profile.sh h3africa ./my-h3africa-bundle.yaml
+python3 scripts/ferrum_meta_cli.py export ghga ./my-ghga-bundle.yaml
+python3 scripts/ferrum_meta_cli.py validate fixtures/valid/ega-minimal-submission.yaml
 # same starter from Ferrum, if you already have the CLI:
-#   ferrum meta export --profile ghga --output ./my-ghga-bundle.yaml
+#   ferrum meta export --profile ghga --output ./my-ghga-bundle.yaml --starter
+# live DRS ids (needs a running node): ferrum meta export --profile ghga --output ./out.yaml
 ```
 
 Replace aliases/checksums with your DRS objects, then re-run `validate-fixture.sh`.

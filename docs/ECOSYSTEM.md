@@ -2,7 +2,7 @@
 
 Four **products**, two free **ambassadors**, Ferrum **companions**, and **proof** repos. Glue is GA4GH; Solum extends into clinical data. **Not a bundle SKU.** Canonical map: [Ferrum PORTFOLIO.md](https://github.com/SynapticFour/Ferrum/blob/main/docs/PORTFOLIO.md).
 
-**You are here:** [ferrum-meta](https://github.com/SynapticFour/ferrum-meta) — **comes with Ferrum**, not sold separately. LinkML schema + archive profiles. No runtime.
+**You are here:** [ferrum-meta](https://github.com/SynapticFour/ferrum-meta) — **comes with Ferrum**, not sold separately. LinkML schema + archive profiles + starter CLI (no live DRS, no archive upload).
 
 ## Repositories
 
@@ -19,7 +19,7 @@ Four **products**, two free **ambassadors**, Ferrum **companions**, and **proof*
 |-------|--------|--------|
 | Identity | **ga4gh-infra** | Broker, visas, DUO, ADS, service registry |
 | Data/compute | **Ferrum** | DRS, WES/TES, TRS, Beacon; built-in passports in standalone mode |
-| **Metadata** | **ferrum-meta** | LinkML schema, profiles, crosswalks — no runtime code |
+| **Metadata** | **ferrum-meta** | LinkML schema, profiles, crosswalks, starter `validate`/`export` CLI |
 | Deployment | **Ferrum-Lab-Kit** | Selective GA4GH surfaces for labs; does not fork Ferrum |
 | Demo/benchmark | **Ferrum-GA4GH-Demo** | Reproducible GIAB benchmark; optional `--with-infra` |
 | Conformance | **HelixTest** | Automated API and workflow tests |
