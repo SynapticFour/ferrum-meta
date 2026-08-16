@@ -107,8 +107,6 @@ dbGaP is out of scope until there is a real mapping (the stub profile was remove
 
 > Cite the git tag of this repository. No Zenodo DOI has been issued yet — do not invent one.
 
-(DOI placeholder — assign on first Zenodo release.)
-
 ## Documentation
 
 | Topic | Link |
@@ -124,3 +122,7 @@ dbGaP is out of scope until there is a real mapping (the stub profile was remove
 
 Copyright 2026 SynapticFour. Licensed under the Apache License, Version 2.0.
 See [LICENSE](LICENSE).
+
+---
+
+**Synaptic Four** · [contact@synapticfour.com](mailto:contact@synapticfour.com) · [synapticfour.com](https://synapticfour.com) · Apache-2.0 (free; Ferrum companion, not sold separately)
