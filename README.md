@@ -14,9 +14,10 @@ can be its own federated archive node, while participating seamlessly in the glo
 genomics data ecosystem.
 
 > **Scope:** Schema, documentation, fixtures, crosswalks, and a **starter CLI**
-> (`scripts/ferrum_meta_cli.py`) that validates and writes GHGA/EGA/H3Africa YAML.
-> Live DRS listing and upload queues live in
-> [Ferrum](https://github.com/SynapticFour/Ferrum). This CLI does **not** submit to EGA/GHGA.
+> (`scripts/ferrum_meta_cli.py`). `validate` checks YAML against the schema.
+> `export` **copies a committed fixture file** (`shutil.copyfile`) and re-validates it —
+> it does **not** talk to Ferrum, list DRS objects, or upload to EGA/GHGA.
+> Live DRS ids: Ferrum `ferrum meta export` (without `--starter`).
 
 ## SynapticFour GA4GH stack
 

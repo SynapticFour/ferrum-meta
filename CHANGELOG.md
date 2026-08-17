@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- README: CLI `export` is `shutil.copyfile` of committed fixtures + validate — not a live Ferrum DRS export.
+
 ### Added
 
 - `scripts/ferrum_meta_cli.py` — `validate` / `export ghga|ega|h3africa` starter bundles (not archive upload).
