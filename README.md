@@ -26,3 +26,5 @@ Schema **0.1.0** (dated **2026-06-14**). Git tag **v0.1.0** peels to `e34fce4920
 ## License
 
 Apache License 2.0 — see [LICENSE](LICENSE).
+
+**Synaptic Four** · [contact@synapticfour.com](mailto:contact@synapticfour.com) · [synapticfour.com](https://synapticfour.com)
