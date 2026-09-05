@@ -1,5 +1,8 @@
 # ferrum-meta
 
+Freeze status (2026-09): [STATUS.md](STATUS.md).
+
+
 [![Validate](https://github.com/SynapticFour/ferrum-meta/actions/workflows/validate.yml/badge.svg)](https://github.com/SynapticFour/ferrum-meta/actions/workflows/validate.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![LinkML](https://img.shields.io/badge/schema-LinkML-orange.svg)](https://linkml.io/)
