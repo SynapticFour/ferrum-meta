@@ -88,9 +88,10 @@ repos) implement the runtime export. GDI metadata schema alignment is tracked as
 
 **Every institution its own node. All nodes one federated system.**
 
-A hospital in Nairobi, a Pasteur institute in Dakar, and a university biobank in Cape Town each
-operate sovereign Ferrum nodes — local ethics, local storage, local validation — while sharing
-a common metadata language and federating discovery and access through GA4GH protocols.
+A hospital in Nairobi, a public-health laboratory in Dakar, and a university biobank in Cape Town
+could each operate sovereign Ferrum nodes in a future federation — local ethics, local storage,
+local validation — while sharing a common metadata language and federating discovery and access
+through GA4GH protocols. That is a vision statement, not a list of installations.
 
 ferrum-meta is the shared metadata contract that makes that federation possible without
 forcing every institution into the same archive portal or connectivity model.

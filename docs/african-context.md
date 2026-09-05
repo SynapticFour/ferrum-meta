@@ -195,19 +195,18 @@ requirements before submission.
 
 ---
 
-## Pasteur Network deployment
+## Hypothetical field node (not a deployment)
 
-The [Pasteur Network](https://pasteur-network.org/) operates genomic surveillance nodes across
-Francophone and Lusophone Africa. **Institut Pasteur Dakar** (Senegal) exemplifies a Ferrum node
-deployment:
+The [Pasteur Network](https://pasteur-network.org/) is public context: it operates genomic surveillance sites across Francophone and Lusophone Africa. **That is not a Ferrum installation and not a Synaptic Four customer.**
 
-- Field and laboratory teams capture pathogen metadata in French or English via Ferrum compass
+Ferrum has no real clinical, DIZ, or genomDE pilot. Demos and CI are not deployments. The following is a **reference-architecture scenario** for how a ferrum-meta `pathogen-profile` *could* be used at an unnamed field laboratory — not a claim that any named institute runs Ferrum:
+
+- Field and laboratory teams capture pathogen metadata in French or English
 - Local validation against `pathogen-profile` before any export
 - ENA submission for outbreak data; controlled human data via EGA where applicable
-- Integration with Africa CDC pathogen genomics initiatives and WHO reference laboratories
+- Alignment with regional public-health genomics programmes where the operator already participates
 
-Institut Pasteur Dakar's existing sequencing infrastructure (including mobile lab capacity)
-maps directly to the offline-first queue-and-upload model described above.
+Offline-first queue-and-upload (described above) is the metadata contract those tools *could* enforce. It is not evidence of a live node.
 
 ---
 
