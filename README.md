@@ -17,7 +17,15 @@ make install   # creates .venv/ and installs linkml + mkdocs
 make test
 ```
 
-Requires Python 3.10+. Validate a fixture: `./scripts/validate-fixture.sh fixtures/valid/ghga-minimal-example.json`. Starter export: `./scripts/export-profile.sh ghga ./my-ghga-bundle.yaml`.
+Requires Python 3.10+. Validate a fixture: `./scripts/validate-fixture.sh fixtures/valid/ghga-minimal-submission.yaml`. Starter export: `./scripts/export-profile.sh ghga ./my-ghga-bundle.yaml`.
+
+### `migrate-assist` (experimentell)
+
+`./scripts/ferrum_meta_cli.py migrate-assist ghga export.csv` vergleicht Feldnamen einer CSV- oder JSON-Datei mit den Slots eines Archivprofils (`ghga`, `ega`, `h3africa`, `pathogen`, `eva`) und schreibt einen Bericht auf die Konsole oder nach `--output`. Der Bericht ist ein Vorschlag. Er führt nichts aus.
+
+Unterstützt Migrationsprojekte, ersetzt keine manuelle Prüfung, exportiert nicht direkt zu EGA/GHGA.
+
+Schema-only, wie der Rest dieses Repos: kein Ferrum-Knoten, kein DRS, kein Upload. YAML-Fixtures bleiben bei `validate`. Eine gleichnamige Spalte ist kein bestandener LinkML-Lauf.
 
 dbGaP is not modelled here. Use GHGA/EGA/H3Africa/pathogen/EVA.
 

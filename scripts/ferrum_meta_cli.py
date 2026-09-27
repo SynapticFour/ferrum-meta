@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Apache-2.0 CLI: validate and write GHGA/EGA/H3Africa starter bundles.
+"""Apache-2.0 CLI: validate fixtures and write starter bundles.
 
 Does not talk to a running Ferrum node and does not upload to any archive.
+`migrate-assist` is experimental: it reports a name mapping only.
 Live DRS ids: Ferrum `ferrum meta export` (without --starter).
 """
 from __future__ import annotations
@@ -11,6 +12,8 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+from migrate_assist import DISCLAIMER, PROFILES, main as migrate_assist_main
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
@@ -71,8 +74,25 @@ def main(argv: list[str] | None = None) -> int:
     p_exp.add_argument("output", nargs="?", default=None)
     p_exp.set_defaults(func=cmd_export)
 
+    p_mig = sub.add_parser(
+        "migrate-assist",
+        help="EXPERIMENTAL. Map CSV/JSON field names onto one archive profile and write a report",
+        description="EXPERIMENTAL. " + DISCLAIMER,
+    )
+    p_mig.add_argument("profile", choices=sorted(PROFILES))
+    p_mig.add_argument("file")
+    p_mig.add_argument("--output", default=None)
+    p_mig.set_defaults(func=cmd_migrate_assist)
+
     args = parser.parse_args(argv)
     return int(args.func(args))
+
+
+def cmd_migrate_assist(args: argparse.Namespace) -> int:
+    argv = [args.profile, args.file]
+    if args.output:
+        argv.extend(["--output", args.output])
+    return migrate_assist_main(argv)
 
 
 if __name__ == "__main__":

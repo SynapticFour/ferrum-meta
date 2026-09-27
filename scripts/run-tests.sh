@@ -129,6 +129,12 @@ if ! run_capture ./scripts/check-crosswalks.sh; then
 fi
 pass "crosswalk documentation"
 
+if ! run_capture python3 ./scripts/check-migrate-assist.py; then
+  fail "migrate-assist"
+  exit 1
+fi
+pass "migrate-assist"
+
 if [[ "${SKIP_DOCS}" == false ]]; then
   require_cmd mkdocs
   if [[ "${VERBOSE}" == true ]]; then

@@ -15,6 +15,7 @@ Commits on `main` after git tag **v0.1.0** (`e34fce4`). Schema YAML for the publ
 
 ### Added
 
+- `migrate-assist` (experimental) — CSV/JSON field-name report against GHGA, EGA, H3Africa, pathogen, or EVA. Suggestion only: no DRS, no archive export, no replacement for a manual check.
 - `scripts/ferrum_meta_cli.py` — `validate` / `export ghga|ega|h3africa` starter bundles (not archive upload).
 - `scripts/export-profile.sh` — GHGA/EGA/H3Africa **starter** bundle. Live DRS ids belong in the consuming product CLI, not this schema repo.
 
