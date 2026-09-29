@@ -11,6 +11,7 @@ Commits on `main` after git tag **v0.1.0** (`e34fce4`). Schema YAML for the publ
 
 ### Changed
 
+- **FEGA hardware line** — metadata-node example is the Ferrum field board: Raspberry Pi 5, 8 GB, 64-bit, USB SSD or NVMe.
 - README: CLI `export` is `shutil.copyfile` of committed fixtures + validate — not a live DRS export.
 
 ### Added

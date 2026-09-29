@@ -44,7 +44,7 @@ FEGA formal membership and enterprise infrastructure are **goals**, not day-one 
 | Not required | Why |
 |--------------|-----|
 | **Formal FEGA membership** | Useful for ELIXIR-wide federation and accreditation; a Ferrum node can operate locally and deposit to EGA/H3ABioNet before joining |
-| **Dedicated server room** | A **Raspberry Pi 4** (4 GB RAM) or equivalent mini-PC is sufficient for a research group's metadata node, validation, and queue management |
+| **Dedicated server room** | The same field board as Ferrum: a **Raspberry Pi 5, 8 GB, 64-bit**, data on USB SSD or NVMe, is enough for a research group's metadata node, validation, and queue management |
 | **Full-time bioinformatician** | **Ferrum compass** handles metadata capture, validation prompts, and export checklists — designed for technologists and data managers, not pipeline engineers |
 
 A sequencing centre, ethics-approved biobank, or national surveillance lab can run a Ferrum
