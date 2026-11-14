@@ -15,7 +15,10 @@ theme:
     repo: fontawesome/brands/github
 
 nav:
-  - Home: index.md
+  - Home: README.md
+  - Getting started: GETTING-STARTED.md
+  - Architecture: ARCHITECTURE.md
+  - For evaluators: FOR-EVALUATORS.md
   - Design Principles: design-principles.md
   - African Context: african-context.md
   - FEGA Compatibility: fega-compatibility.md
