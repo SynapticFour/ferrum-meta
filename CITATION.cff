@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: Please cite this repository using these fields. Prefer this file over a hand-copied line. No Zenodo DOI has been issued for this schema.
+title: ferrum-meta
+authors:
+  - name: Synaptic Four
+repository-code: https://github.com/SynapticFour/ferrum-meta
+url: https://synapticfour.com/en/ferrum/
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-08-01
+type: software
